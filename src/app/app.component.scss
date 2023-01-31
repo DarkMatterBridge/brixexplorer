@@ -1,0 +1,61 @@
+.mat-toolbar{
+  background: rgb(30, 30, 30);
+  color: white;
+}
+
+.main {
+  background: rgb(40,40,40);
+  width: 100%;
+  height: 90vh;
+}
+
+.pic {
+  background: rgb(40,40,40);
+  background-image: url("./../assets/suits.jpg");
+  background-size: 400px;
+  background-blend-mode: luminosity;
+  opacity: 0.1;
+
+  background-repeat:no-repeat;
+  background-position: center center;
+  //background-color: rgba(0,99,121,0.95);
+  //background-image: url("./../../assets/background.png");
+  //display: inline-block;
+  //vertical-align: middle;
+  width: 100%;
+  height: 100vh;
+}
+
+.line {
+  width: 100%;
+  height: 2px;
+  background: forestgreen;
+}
+
+.icon {
+  background-image: url("./../assets/suits.jpg");
+  background-size: 100%;
+  background-repeat:no-repeat;
+  background-position: center center;
+  //display: inline-block;
+  min-width: 30px;
+  min-height: 30px;
+
+}
+
+.m4 {
+  width: 20px;
+}
+
+.ic {
+  color: green;
+  cursor: pointer;
+}
+
+.visable {
+  visibility: visible;
+}
+
+.nonvisable {
+  visibility: hidden;
+}

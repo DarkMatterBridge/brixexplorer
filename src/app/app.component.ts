@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'brixplorer';
+
+
+  x = false
+
+  bidding() {
+    this.x = !this.x
+  }
 }
