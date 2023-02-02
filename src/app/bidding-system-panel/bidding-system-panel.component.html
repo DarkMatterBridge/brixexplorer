@@ -1,10 +1,109 @@
 
 <div class="biddingPanel">
-  {{ran}}
+  <div class="topline">
+<!--    <app-bnode-sequence (selectNode)="setBnode($event)" [bNodeSequence]="bNodeSequence"-->
+<!--                        (bNodeSequenceEventEmitter)="activateDealView2($event)">-->
+<!--    </app-bnode-sequence>-->
+    <div>
+      <a [routerLink]="" (click)="editable=!editable" matTooltip="Edit">
+        <mat-icon *ngIf="editable" [ngStyle]="{'color':'red'}" aria-hidden="false" aria-label="Example home icon">edit</mat-icon>
+        <mat-icon *ngIf="!editable" [ngStyle]="{'color':'black'}" aria-hidden="false" aria-label="Example home icon">edit</mat-icon>
+      </a>
+
+      <a *ngIf="editable" [routerLink]="" (click)="saveIntoLocalStorage()" matTooltip="Save to Browser Storage">
+        <mat-icon >save</mat-icon>
+      </a>
+
+      <button mat-icon-button [matMenuTriggerFor]="menu2" style="text-align: right">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </div>
+
+    <mat-menu #menu2="matMenu" xPosition="before">
+
+      <button mat-menu-item (click)="saveIntoLocalStorage()">
+        <mat-icon aria-hidden="false" aria-label="Example home icon">save</mat-icon>
+        Save to Browser Storage
+      </button>
+      <button mat-menu-item (click)="loadFromLocalStorage()">
+        <mat-icon aria-hidden="false" aria-label="Example home icon">restore_page</mat-icon>
+        Load from Browser Storage
+      </button>
+      <button mat-menu-item (click)="downloadSystem()">
+        <mat-icon aria-hidden="false" aria-label="Example home icon">download</mat-icon>
+        Save to local File
+      </button>
+      <button mat-menu-item (click)="triggerFileUpload()">
+        <mat-icon aria-hidden="false" aria-label="Example home icon">upload</mat-icon>
+        Load from local File
+      </button>
+      <button mat-menu-item (click)="showRawSystem()">
+        <mat-icon aria-hidden="false" aria-label="Example home icon">Raw on</mat-icon>
+        Show raw system
+      </button>
+      <button mat-menu-item (click)="showAllBids()">
+        <mat-icon aria-hidden="false" aria-label="Example home icon">T</mat-icon>
+        Show all Bids
+      </button>
+      <button mat-menu-item>
+        <a [routerLink]="" (click)="loadElementarySystem()"> Load Elementary System </a>
+      </button>
+      <button mat-menu-item>
+        <a [routerLink]="" (click)="resetSystem()"> Load new System </a> -
+      </button>
+
+    </mat-menu>
+  </div>
+
+
+  <div *ngIf="!bidEditable" class="topline">
+    <div>
+      <span style="visibility: hidden"> --- </span>
+      <span [ngClass]="{'opp': bnc.bnode.ob}" style="  font-size: 14pt;"
+            (click)="editBid()" (mouseover)="calcStatistics()" matTooltip="Number of Subnodes: {{noNodes}}">
+        <app-strain-symbol *ngIf="!bidEditable" [strain]="bnc.bid"></app-strain-symbol>
+        <app-strain-symbol *ngIf="bidEditable" [strain]="bnc.bnode.bid"></app-strain-symbol>
+      </span>
+      <span style="visibility: hidden"> - </span>
+
+      <span class="con" (click)="editBid()"> {{bnc.bnode.con}}</span>
+      <span class="desc"> {{bnc.bnode.desc}}</span>
+
+    </div>
+    <div>
+      <!--      <a [routerLink]="" (click)="editable=true" matTooltip="Edit">-->
+      <!--        <mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon>-->
+      <!--      </a>-->
+      <a *ngIf="editable" [routerLink]="" (click)="markAsLinkable()" matTooltip="Mark as linkable Node">
+        <mat-icon aria-hidden="false" aria-label="Example home icon">add_link</mat-icon>
+      </a>
+      <!--      <a [routerLink]="" (click)="showStatistics()" matTooltip="statistics">-->
+      <!--        <mat-icon>analytics</mat-icon>-->
+      <!--      </a>-->
+
+    </div>
+  </div>
+
 
   <div class="topline">
 
+    <span *ngIf="bidEditable">
+        <a [routerLink]="" (click)="bidEditable=false" matTooltip="Leave Edit">
+          <mat-icon>edit_off</mat-icon>
+        </a>
+<!--        <app-node-simple-edit [bnode]="bnc.bnode"></app-node-simple-edit>-->
+      </span>
 
-</div>
+  </div>
+
+<!--  <app-bid-list [bnc]="bnc" [subject]="subject" [editable]="editable"></app-bid-list>-->
+
+<!--  <app-linkable-bnode-list [linkableBnodes]="linkableBnodes"-->
+<!--                           (linkNodeEvent)="linkBnode($event)"></app-linkable-bnode-list>-->
+
+  <input #fileInput type="file" accept=".json" (change)="processFile(fileInput)" style="visibility:hidden">
 </div>
 
+<!--<div class="bidjar" *ngIf="dealViewActivated">-->
+<!--  <app-deal-view [bNodeSequence]="bNodeSequenceForDealView"></app-deal-view>-->
+<!--</div>-->

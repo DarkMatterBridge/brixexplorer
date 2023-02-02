@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {BNode} from "../model/BNode";
 import {BNodeComposite} from "../model/BNodeComposite";
 import {BNodeSequence} from "../model/BNodeSequence";
 import {BiddingSystem} from "../model/BiddingSystem";
 import {BridgeSystemManager} from "../service/bridge-system-manager";
 import {Subject} from "rxjs";
+import {FileService} from "../service/file.service";
 
 @Component({
   selector: 'app-bidding-system-panel',
@@ -31,10 +32,10 @@ export class BiddingSystemPanelComponent implements OnInit {
   bidEditable = false;
   noNodes = 0;
 
-  ran = 0;
+  @ViewChild('fileInput') fileInput!: ElementRef<HTMLElement>;
 
   constructor(private bsm: BridgeSystemManager,
-              // private fileService: FileService,
+              private fileService: FileService,
               // private conditionManager: ConditionManager
   ) {
     this.bridgeSystem = new BiddingSystem(bsm);
@@ -98,53 +99,6 @@ export class BiddingSystemPanelComponent implements OnInit {
     this.resetBidding();
   }
 
-  // saveIntoLocalStorage(): void {
-  //   const name = 'precision';
-  //   this.fileService.saveIntoLocalStorage(name, this.baseNode);
-  // }
-
-  // loadFromLocalStorage(): void {
-  //   const name = 'precision';
-  //   const b = this.fileService.loadFromLocalStorage(name);
-  //   if (b) {
-  //     this.setSystem(b);
-  //     this.resetBidding();
-  //   }
-  // }
-
-  // downloadSystem(): void {
-  //   const name = 'precision';
-  //   this.fileService.downloadSystem(name, this.baseNode);
-  // }
-
-  // showRawSystem(): void {
-  //   const name = 'precision';
-  //   this.fileService.showRawSystem(name, this.baseNode);
-  // }
-
-  // showAllBids(): void {
-  //   const bidList = this.bsm.getTotalBidSequenceMap(this.baseNode);
-  //   const bidList2 = this.bsm.getTotalBidSequenceList(this.baseNode);
-  //   let text = '<p>';
-  //   bidList.forEach((sequence, bn) => text = text + bn.id.toString() + ': ' + sequence + '<\p><p>');
-  //   text = text + '</p>';
-  //   const text2 = bidList2.join('<\p><p>');
-  //   this.fileService.showInNewWindow('t1', text);
-  //   // this.fileService.showInNewWindow('t2', text2);
-  //   console.log('<p>' + text + '<\p>');
-  //   // const bidList = this.bsm.getTotalBidList(this.baseNode);
-  //   // let bl = Array.from(bidList).map(([x, y]) => x + ":" + y.bid + "->" + y.con);
-  //   // let text = bl.join('          \n');
-  //   // this.fileService.showInNewWindow(text);
-  //   // console.log(this.bsm.getAllLinkedNodes(bidList));
-  // }
-
-  // processFile(input: HTMLInputElement): void {  // TODO Bug > does not triggger if file name did not change
-  //   const files = input.files;
-  //   if (files) {
-  //     this.fileService.uploadSystem(files[0], this.uploadSubject);
-  //   }
-  // }
 
   resetBidding(): void {
     this.baseNode = this.bridgeSystem.rootNode;
@@ -181,15 +135,69 @@ export class BiddingSystemPanelComponent implements OnInit {
   //   this.bNodeSequenceForDealView = {...bns} as BNodeSequence; // Attention> this spread construct removes all functions
   // }
 
-  // triggerFileUpload(): void {
-  //   const el: HTMLElement = this.fileInput.nativeElement;
-  //   el.click();
-  // }
-
   editBid(): void {
     if (this.editable) {
       this.bidEditable = true;
     }
   }
+
+
+
+//
+
+  saveIntoLocalStorage(): void {
+    const name = 'precision';
+    this.fileService.saveIntoLocalStorage(name, this.baseNode);
+  }
+
+  loadFromLocalStorage(): void {
+    const name = 'precision';
+    const b = this.fileService.loadFromLocalStorage(name);
+    if (b) {
+      this.setSystem(b);
+      this.resetBidding();
+    }
+  }
+
+  downloadSystem(): void {
+    const name = 'precision';
+    this.fileService.downloadSystem(name, this.baseNode);
+  }
+
+  showRawSystem(): void {
+    const name = 'precision';
+    this.fileService.showRawSystem(name, this.baseNode);
+  }
+
+  showAllBids(): void {
+    const bidList = this.bsm.getTotalBidSequenceMap(this.baseNode);
+    const bidList2 = this.bsm.getTotalBidSequenceList(this.baseNode);
+    let text = '<p>';
+    bidList.forEach((sequence, bn) => text = text + bn.id.toString() + ': ' + sequence + '<\p><p>');
+    text = text + '</p>';
+    const text2 = bidList2.join('<\p><p>');
+    this.fileService.showInNewWindow('t1', text);
+    // this.fileService.showInNewWindow('t2', text2);
+    console.log('<p>' + text + '<\p>');
+    // const bidList = this.bsm.getTotalBidList(this.baseNode);
+    // let bl = Array.from(bidList).map(([x, y]) => x + ":" + y.bid + "->" + y.con);
+    // let text = bl.join('          \n');
+    // this.fileService.showInNewWindow(text);
+    // console.log(this.bsm.getAllLinkedNodes(bidList));
+  }
+
+  processFile(input: HTMLInputElement): void {  // TODO Bug > does not triggger if file name did not change
+    const files = input.files;
+    if (files) {
+      this.fileService.uploadSystem(files[0], this.uploadSubject);
+    }
+  }
+
+  triggerFileUpload(): void {
+    const el: HTMLElement = this.fileInput.nativeElement;
+    el.click();
+  }
+
+
 
 }

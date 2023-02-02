@@ -10,21 +10,27 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from "@angular/material/menu";
 import {MatIconModule} from "@angular/material/icon";
 import { BiddingSystemPanelComponent } from './bidding-system-panel/bidding-system-panel.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { StrainSymbolComponent } from './strain-symbol/strain-symbol.component';
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    BiddingSystemPanelComponent
+    BiddingSystemPanelComponent,
+    StrainSymbolComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MatSlideToggleModule,
     MatToolbarModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]
