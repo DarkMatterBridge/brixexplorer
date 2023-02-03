@@ -2,7 +2,6 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {BNode} from "../model/BNode";
 import {BNodeComposite} from "../model/BNodeComposite";
 import {BNodeSequence} from "../model/BNodeSequence";
-import {BiddingSystem} from "../model/BiddingSystem";
 import {BridgeSystemManager} from "../service/bridge-system-manager";
 import {Subject} from "rxjs";
 import {FileService} from "../service/file.service";
@@ -18,7 +17,7 @@ export class BiddingSystemPanelComponent implements OnInit {
   bnc: BNodeComposite = new BNodeComposite(this.baseNode);
 
   subject: Subject<BNodeComposite> = new Subject<BNodeComposite>();
-  bridgeSystem: BiddingSystem;
+  // bridgeSystem: BiddingSystem;
 
   uploadSubject: Subject<BNode> = new Subject<BNode>();
 
@@ -34,25 +33,25 @@ export class BiddingSystemPanelComponent implements OnInit {
 
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLElement>;
 
-  constructor(private bsm: BridgeSystemManager,
+  constructor(private bridgeSystemM: BridgeSystemManager,
               private fileService: FileService,
               // private conditionManager: ConditionManager
   ) {
-    this.bridgeSystem = new BiddingSystem(bsm);
+    // this.bridgeSystem = new BiddingSystem(bsm);
   }
 
   ngOnInit(): void {
     this.subject.asObservable().subscribe(b => this.setBnodeFromBelow(b));
     this.resetSystem();
-    // this.loadFromLocalStorage();
+    this.loadFromLocalStorage();
     this.uploadSubject.subscribe(bn => this.setSystem(bn));
     // this.fileService.$subject
     //   .subscribe((bs) =>  this.bnc = this.bNodeSequence.importBiddingSequence(this.bsm, bs, this.conditionManager));
   }
 
   setSystem(baseNode: BNode): void {
-    this.bsm.makeUsable(baseNode);
-    this.baseNode = baseNode;
+    this.bridgeSystemM.makeUsable(baseNode);
+    this.baseNode = this.bridgeSystemM.baseNode;
     this.bnc = new BNodeComposite(baseNode);
   }
 
@@ -80,28 +79,28 @@ export class BiddingSystemPanelComponent implements OnInit {
 
   getStatistics(): void {
     const hid =
-      this.bsm.determineAndSetHighestId(this.baseNode);
+      this.bridgeSystemM.determineAndSetHighestId(this.baseNode);
     const nobids =
-      this.bsm.getTotalBidList(this.baseNode).size;
+      this.bridgeSystemM.getTotalBidList(this.baseNode).size;
 
     alert('Highest ID: ' + hid + ' No of bids: ' + nobids);
   }
 
   resetSystem(): void {
-    this.bridgeSystem = new BiddingSystem(this.bsm);
+    // this.bridgeSystem = new BiddingSystem(this.bsm);
     this.resetBidding();
   }
 
-  loadElementarySystem(): void {
-    this.bridgeSystem = new BiddingSystem(this.bsm);
-    this.bridgeSystem.setElementarySystem();
-    this.setSystem(this.bridgeSystem.rootNode);
+  loadElementarySystem(): void { //TODO 2023
+    // this.bridgeSystem = new BiddingSystem(this.bsm);
+    // this.bridgeSystem.setElementarySystem();
+    // this.setSystem(this.bridgeSystem.rootNode);
     this.resetBidding();
   }
 
 
   resetBidding(): void {
-    this.baseNode = this.bridgeSystem.rootNode;
+    // this.baseNode = this.bridgeSystem.rootNode;
     this.bnc = new BNodeComposite(this.baseNode);
     this.bNodeSequence.reset();
   }
@@ -121,11 +120,11 @@ export class BiddingSystemPanelComponent implements OnInit {
   }
 
   calcStatistics(): void {
-    this.noNodes = this.bsm.getTotalBidList(this.bnc.bnode).size;
+    this.noNodes = this.bridgeSystemM.getTotalBidList(this.bnc.bnode).size;
   }
 
   showStatistics(): number {
-    this.noNodes = this.bsm.getTotalBidList(this.bnc.bnode).size;
+    this.noNodes = this.bridgeSystemM.getTotalBidList(this.bnc.bnode).size;
     alert('No of Subnodes: ' + this.noNodes);
     return this.noNodes;
   }
@@ -140,7 +139,6 @@ export class BiddingSystemPanelComponent implements OnInit {
       this.bidEditable = true;
     }
   }
-
 
 
 //
@@ -170,8 +168,8 @@ export class BiddingSystemPanelComponent implements OnInit {
   }
 
   showAllBids(): void {
-    const bidList = this.bsm.getTotalBidSequenceMap(this.baseNode);
-    const bidList2 = this.bsm.getTotalBidSequenceList(this.baseNode);
+    const bidList = this.bridgeSystemM.getTotalBidSequenceMap(this.baseNode);
+    const bidList2 = this.bridgeSystemM.getTotalBidSequenceList(this.baseNode);
     let text = '<p>';
     bidList.forEach((sequence, bn) => text = text + bn.id.toString() + ': ' + sequence + '<\p><p>');
     text = text + '</p>';
@@ -197,7 +195,6 @@ export class BiddingSystemPanelComponent implements OnInit {
     const el: HTMLElement = this.fileInput.nativeElement;
     el.click();
   }
-
 
 
 }

@@ -4,9 +4,9 @@ import {BNode} from "../model/BNode";
 @Injectable({
   providedIn: 'root'
 })
-export class BridgeSystemManager {
+export class BridgeSystemManager {  // the future Bridge-System ! 2023 todo
 
-  bs?: BNode; // dubious, whether this belongs to a service > TODO
+  baseNode: BNode =  new BNode("base", [], "")   // this is the global bridge system root noe!
 
   constructor() { }
 
@@ -58,7 +58,7 @@ export class BridgeSystemManager {
     const bidList = this.getTotalBidList(bn);
     this.connectLinkedNodesW(this.determineLinkedNodes(bidList), bidList);
     this.determineAndSetHighestId(bn);
-    this.bs = bn;
+    this.baseNode = bn;
   }
 
   determineLinkedNodesDirect(node: BNode): BNode[] {
@@ -133,7 +133,7 @@ export class BridgeSystemManager {
   }
 
   isALinkedNodeInSystem(bnode: BNode): boolean {
-    return this.bs !== undefined && this.isALinkedNodeIn(bnode, this.bs);
+    return this.baseNode !== undefined && this.isALinkedNodeIn(bnode, this.baseNode);
   }
 
   persistNode(bnode: BNode): void {

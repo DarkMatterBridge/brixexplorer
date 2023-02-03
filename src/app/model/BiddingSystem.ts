@@ -19,10 +19,6 @@ export class BiddingSystem {
     this.bidList = this.bsm.getTotalBidList(this.rootNode);
   }
 
-  addNode(bnode: BNode): void {
-    this.bsm.addNode(this.currentNode, bnode);
-  }
-
   setElementarySystem(): void {
     this.rootNode.nodes.push(new BNode('opening', [], '', ));
     this.rootNode.nodes.push(new BNode('2C', [], ''));

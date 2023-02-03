@@ -1,6 +1,9 @@
 
 .biddingPanel {
-  background: rgb(230,230,230);
+  //background: rgb(230,230,230);
+
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,96,0,1) 0%, rgba(9,121,9,1) 35%, rgba(0,212,155,1) 100%);
   //background-color: rgba(0,99,121,0.95);
   //background-image: url("./../../assets/background.png");
   display: inline-block;
