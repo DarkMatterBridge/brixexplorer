@@ -3,7 +3,7 @@
   //background: rgb(230,230,230);
 
   background: rgb(2,0,36);
-  background: linear-gradient(90deg, rgba(2,96,0,1) 0%, rgba(9,121,9,1) 35%, rgba(0,212,155,1) 100%);
+  background: linear-gradient(110deg, rgba(2,200,0,1) 0%, rgba(9,181,9,1) 20%, rgba(100,230,200,1) 100%);
   //background-color: rgba(0,99,121,0.95);
   //background-image: url("./../../assets/background.png");
   display: inline-block;
@@ -17,4 +17,20 @@
 .topline {
   display:grid;
   grid-template-columns: 1fr auto;
+}
+
+
+.opp {
+  background: #ffe480;
+}
+
+.desc {
+  background: blue;
+  color: white;
+  margin: 3px;
+}
+
+
+.mat-icon {
+  font-size: 25px;  // only in this component
 }
