@@ -1,0 +1,27 @@
+<span class="pointer">
+  <mat-icon matTooltip='Back to Roota' (click)="reset()">home</mat-icon>
+
+  </span>
+<div class="b-bidding-sequence">
+  <span>&nbsp;</span>
+  <span *ngFor="let bnc of bNodeSequence.compositeNodes; let i = index" (click)="selectBid(bnc)">
+
+ <span class="pointer" [ngClass]="{'underlined': bnc == bNodeSequence.indexNode,
+                 'opp': bnc.bnode.ob}"   matTooltip="{{bnc.contextualizedCondition}}">
+ <app-strain-symbol [strain]="bNodeSequence.compositeNodes[i].bid"></app-strain-symbol>
+ </span>&nbsp;
+    <span *ngIf="i<bNodeSequence.compositeNodes.length-1  && bnc.bid !== 'opening'">-</span>
+  <span>&nbsp;</span>
+</span>
+
+</div>
+
+<span style="padding-left: 2em;float: right">
+
+  <span (click)="generateRandomSequenceFromIndex()" class="pointer" matTooltip="Generate Random Sequence">
+    ↝
+  </span>
+  <span *ngIf="bNodeSequence.isRealBiddingSequence" (click)="emitSequence()"
+        class="pointer">
+    <mat-icon matTooltip="Generate Hands">preview</mat-icon></span>
+ </span>

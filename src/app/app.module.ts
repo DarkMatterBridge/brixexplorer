@@ -17,6 +17,7 @@ import {BidListComponent} from './bidding-system-panel/bid-list/bid-list.compone
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { BidItemComponent } from './bidding-system-panel/bid-list/bid-item/bid-item.component';
 import {FormsModule} from "@angular/forms";
+import { BnodeSequenceComponent } from './bnode-sequence/bnode-sequence.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {FormsModule} from "@angular/forms";
     BiddingSystemPanelComponent,
     StrainSymbolComponent,
     BidListComponent,
-    BidItemComponent
+    BidItemComponent,
+    BnodeSequenceComponent
   ],
   imports: [
     BrowserModule,

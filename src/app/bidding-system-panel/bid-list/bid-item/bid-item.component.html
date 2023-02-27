@@ -1,8 +1,9 @@
 <td *ngIf="newNode" style="float:right">
   <input [(ngModel)]="bnc.bnode.bid" size="2"/>
 </td>
-<td *ngIf="!newNode" (click)="selectBid(bnc)" class="min20" [ngClass]="{'opp': bnc.bnode.ob}"
-    style="float:right; font-size: 13pt" class="pointer">
+<td *ngIf="!newNode" (click)="selectBid(bnc)" class="min20"
+    style="float:right; font-size: 13pt" class="pointer" >
+  <span  [ngClass]="{'opp': bnc.bnode.ob}"></span>
   <app-strain-symbol *ngIf="!editable" [strain]="bnc.bid"></app-strain-symbol>
   <app-strain-symbol *ngIf="editable" [strain]="bnc.bnode.bid"></app-strain-symbol>
 </td>

@@ -9,9 +9,9 @@
     <tr *ngFor="let bnc of bncList" app-bid-item [bnc]="bnc" [subject]="subject" [editable]="editable"
         ($addOrDeleteNode)="addOrdeleteNode($event)">
     </tr>
-<!--    <tr *ngIf="editable" app-bid-item [bnc]="newBnc" [subject]="subject" [editable]="editable"-->
-<!--        ($addOrDeleteNode)="addOrdeleteNode($event)" [newNode]="true">-->
-<!--    </tr>-->
+    <tr *ngIf="editable" app-bid-item [bnc]="newBnc" [subject]="subject" [editable]="editable"
+        ($addOrDeleteNode)="addOrdeleteNode($event)" [newNode]="true">
+    </tr>
     <a [routerLink]=""  (click)="getBncList2Levels()" matTooltip="show Bid Table">
       <mat-icon aria-hidden="false" aria-label="Example home icon">table_chart</mat-icon>
     </a>
@@ -31,8 +31,8 @@
       </a>
       </td>
     </tr>
-<!--    <tr *ngFor="let bnc of bncLinkedList" app-bid-item="bn" [bnc]="bnc" [subject]="subject" [editable]="false"-->
-<!--        ($addOrDeleteNode)="addOrdeleteNode($event)" class="linkeNodes">-->
-<!--    </tr>-->
+    <tr *ngFor="let bnc of bncLinkedList" app-bid-item="bn" [bnc]="bnc" [subject]="subject" [editable]="false"
+        ($addOrDeleteNode)="addOrdeleteNode($event)" class="linkeNodes">
+    </tr>
   </table>
 </div>

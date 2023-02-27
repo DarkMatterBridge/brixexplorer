@@ -34,8 +34,9 @@ export class StrainSymbolComponent implements OnInit, OnChanges {
   }
 
   handleBidOrStrain(): void {
-    if (this.strain === '0') {
+    if (this.strain === 'opening') {
       this.symbol = '▶';
+      this.class = 'opening';
       return;
     }
     if (this.strain.isStrain()) {  // a cards symbol or N (i.e. NT)

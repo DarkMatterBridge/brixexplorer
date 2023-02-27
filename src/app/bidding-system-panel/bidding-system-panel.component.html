@@ -1,8 +1,8 @@
 <div class="biddingPanel">
   <div class="topline">
-    <!--    <app-bnode-sequence (selectNode)="setBnode($event)" [bNodeSequence]="bNodeSequence"-->
-    <!--                        (bNodeSequenceEventEmitter)="activateDealView2($event)">-->
-    <!--    </app-bnode-sequence>-->
+        <app-bnode-sequence (selectNode)="setBnode($event)" [bNodeSequence]="bNodeSequence"
+                            (bNodeSequenceEventEmitter)="activateDealView2($event)">
+        </app-bnode-sequence>
     <div>
       <a [routerLink]="" (click)="editable=!editable" matTooltip="Edit">
         <mat-icon *ngIf="editable" [ngStyle]="{'color':'red'}" aria-hidden="false" aria-label="Example home icon">edit
@@ -70,6 +70,7 @@
       <span class="desc"> {{bnc.bnode.desc}}</span>
 
     </div>
+    <div class="line"></div>
     <div>
       <!--      <a [routerLink]="" (click)="editable=true" matTooltip="Edit">-->
       <!--        <mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon>-->

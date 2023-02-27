@@ -129,10 +129,10 @@ export class BiddingSystemPanelComponent implements OnInit {
     return this.noNodes;
   }
 
-  // activateDealView2(bns: BNodeSequence): void {
-  //   this.dealViewActivated = true;
-  //   this.bNodeSequenceForDealView = {...bns} as BNodeSequence; // Attention> this spread construct removes all functions
-  // }
+  activateDealView2(bns: BNodeSequence): void {
+    // this.dealViewActivated = true; todo
+    this.bNodeSequenceForDealView = {...bns} as BNodeSequence; // Attention> this spread construct removes all functions
+  }
 
   editBid(): void {
     if (this.editable) {
