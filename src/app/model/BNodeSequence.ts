@@ -1,7 +1,7 @@
-import {BNode} from './BNode';
 import './../model/string.extension';
 import {BNodeComposite} from './BNodeComposite';
 import {ConditionManager} from '../service/ConditionManager';
+import {DBid} from "./DBid";
 // import {BiddingSequence} from './BiddingSequence';
 // import {BridgeSystemManager} from '../services/bridge-system-manager.service';
 
@@ -45,30 +45,39 @@ export class BNodeSequence {  // TODO better BNCSequence?
     return this.compositeNodes.length;
   }
 
+  getLast(): BNodeComposite | undefined {
+    if (this.compositeNodes.length > 0)
+      return this.compositeNodes[this.compositeNodes.length - 1];
+    else
+      return undefined;
+  }
+
+
   positionOfBNode(bnc: BNodeComposite): number {
     return this.compositeNodes.indexOf(bnc);
   }
 
-  public buildCanonicalSequence(): Array<BNode> { // todo include all directions & opps
+  public buildCanonicalSequence(): Array<DBid> { // todo include 2+ consecutive opps biddings
 
-    const e = new Array<BNode>();
-    let passeDefault = false;
+    const dbids = new Array<DBid>();
+    let opsBiddingOccured = true;
     for (let i = 1; i < this.compositeNodes.length; i++) {
       if (this.compositeNodes[i].bnode.ob !== undefined && this.compositeNodes[i].bnode.ob) {
-        passeDefault = false;
-      } else {
-        if (passeDefault) {
-          e.push(new BNode('P', new Array<BNode>(), ''));
+        if (opsBiddingOccured) {
+          dbids.push(new DBid('P', ''));
         }
-        passeDefault = true;
+        opsBiddingOccured = true;
+      } else {
+        if (!opsBiddingOccured) {
+          dbids.push(new DBid('P', ''));
+        }
+        opsBiddingOccured = false;
       }
-      const b = {...this.compositeNodes[i].bnode};
-      b.bid = this.compositeNodes[i].bid; // todo : check if this is right
-      b.con = this.compositeNodes[i].contextualizedCondition;
-      e.push(b);
+      let dbid = new DBid(this.compositeNodes[i].bid, this.compositeNodes[i].contextualizedCondition)
+      dbid.desc = this.compositeNodes[i].bnode.desc;
+      dbids.push(dbid);
     }
-    // this.rbNodes = e;
-    return e;
+    return dbids;
   }
 
   public generateRandomSequenceFromIndex(conditionManager: ConditionManager): void {

@@ -103,7 +103,14 @@
   <!--                           (linkNodeEvent)="linkBnode($event)"></app-linkable-bnode-list>-->
 
   <input #fileInput type="file" accept=".json" (change)="processFile(fileInput)" style="visibility:hidden">
+
+
 </div>
+
+<app-bnode-sequence-table (selectNode)="setBnode($event)" [bNodeSequence]="bNodeSequence"
+                          (bNodeSequenceEventEmitter)="activateDealView2($event)">
+</app-bnode-sequence-table>
+
 
 <!--<div class="bidjar" *ngIf="dealViewActivated">-->
 <!--  <app-deal-view [bNodeSequence]="bNodeSequenceForDealView"></app-deal-view>-->

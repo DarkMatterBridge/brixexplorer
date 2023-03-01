@@ -18,6 +18,8 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { BidItemComponent } from './bidding-system-panel/bid-list/bid-item/bid-item.component';
 import {FormsModule} from "@angular/forms";
 import { BnodeSequenceComponent } from './bnode-sequence/bnode-sequence.component';
+import { BnodeSequenceTableComponent } from './bnode-sequence-table/bnode-sequence-table.component';
+import { BiddingSequenceComponent } from './bidding-sequence/bidding-sequence.component';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { BnodeSequenceComponent } from './bnode-sequence/bnode-sequence.componen
     StrainSymbolComponent,
     BidListComponent,
     BidItemComponent,
-    BnodeSequenceComponent
+    BnodeSequenceComponent,
+    BnodeSequenceTableComponent,
+    BiddingSequenceComponent
   ],
   imports: [
     BrowserModule,
