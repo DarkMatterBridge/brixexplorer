@@ -1,25 +1,27 @@
 <div class="b-bidding-sequence">
 
-<table class="tabl">
-  <tr class="header">
-    <td class="cell">Opener</td>
+<!--<table class="tabl">-->
+<!--  <tr class="header">-->
+<!--    <td class="cell">Opener</td>-->
 
-    <td class="cell">Responder  </td>
-  </tr>
-  <tr *ngFor="let i of nums()">
-    <td *ngFor="let j of [0,1]">
-      <span *ngIf="2*i+j+1 < this.bNodeSequence.getLength()">
+<!--    <td class="cell">Responder  </td>-->
+<!--  </tr>-->
+<!--  <tr *ngFor="let i of nums()">-->
+<!--    <td *ngFor="let j of [0,1]">-->
+<!--      <span *ngIf="2*i+j+1 < this.bNodeSequence.getLength()">-->
 
-         <span class="pointer" [ngClass]="{'fett': bNodeSequence.compositeNodes[2*i+j+1] == bNodeSequence.indexNode,
-                 'opp': bNodeSequence.compositeNodes[2*i+j+1].bnode.ob}"
-               matTooltip="{{bNodeSequence.compositeNodes[2*i+j+1].contextualizedCondition}}">
- <app-strain-symbol [strain]="bNodeSequence.compositeNodes[2*i+j+1].bid"></app-strain-symbol>
- </span>&nbsp;
+<!--         <span class="pointer" [ngClass]="{'fett': bNodeSequence.compositeNodes[2*i+j+1] == bNodeSequence.indexNode,-->
+<!--                 'opp': bNodeSequence.compositeNodes[2*i+j+1].bnode.ob}"-->
+<!--               matTooltip="{{bNodeSequence.compositeNodes[2*i+j+1].contextualizedCondition}}">-->
+<!-- <app-strain-symbol [strain]="bNodeSequence.compositeNodes[2*i+j+1].bid"></app-strain-symbol>-->
+<!-- </span>&nbsp;-->
 
-      </span>
-    </td>
-  </tr>
+<!--      </span>-->
+<!--    </td>-->
+<!--  </tr>-->
 
-</table>
+<!--</table>-->
+
+  <app-bidding-sequence [biddingSequence]="biddingSequence" [count]="0"> </app-bidding-sequence>
 
 </div>

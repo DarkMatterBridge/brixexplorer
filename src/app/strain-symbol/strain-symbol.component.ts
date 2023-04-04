@@ -63,11 +63,17 @@ export class StrainSymbolComponent implements OnInit, OnChanges {
   }
 
   handleSuitChar(suit: string): void {
-    if (suit === 'H' || suit === 'D') {
-      this.class = 'red';
+    if (suit === 'H' ) {
+      this.class = 'heart';
     }
-    if (suit === 'C' || suit === 'S') {
-      this.class = 'blue';
+    if (suit === 'S') {
+      this.class = 'spade';
+    }
+    if (suit === 'D') {
+      this.class = 'diamond';
+    }
+    if (suit === 'C' ) {
+      this.class = 'club';
     }
     if (suit === 'N' || suit === 'NT') {
       this.class = 'black';

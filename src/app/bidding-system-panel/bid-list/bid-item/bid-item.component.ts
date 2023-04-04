@@ -64,4 +64,9 @@ export class BidItemComponent implements OnInit {
     //   return e.toString();
     // }
   }
+
+
+  onKeyDownEvent(x: any) {
+    alert(x);
+  }
 }

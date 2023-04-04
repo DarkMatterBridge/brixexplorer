@@ -16,6 +16,7 @@
 </td>
 <td *ngIf="normal && editable ">
   <input [(ngModel)]="bnc.bnode.con" size="50" (input)="checkCondition()"
+         (keydown.enter)="addOdeleteBid(bnc.bnode)"
          [ngClass]="{'parsingNotOk': !okay}" [disabled]="false" matTooltip='{{parsingErrorText}}'/>
 </td>
 <td *ngIf="normal  && !editable">
@@ -32,15 +33,15 @@
 </td>
 
 <td>
-  <a *ngIf="!newNode && editable" [routerLink]="" (click)="addOdeleteBid(bnc.bnode)" class="mat-cell">
+  <span *ngIf="!newNode && editable" (click)="addOdeleteBid(bnc.bnode)" class="mat-cell">
     <!--      <i class="material-icons">-->
     <!--        delete-->
     <!--      </i>-->
     <mat-icon aria-hidden="false" aria-label="Example home icon">delete</mat-icon>
-  </a>
-  <a *ngIf="newNode" [routerLink]="" (click)="addOdeleteBid(bnc.bnode)" class="mat-cell">
+  </span>
+  <span *ngIf="newNode" (click)="addOdeleteBid(bnc.bnode)" class="mat-cell" tabindex="1" class="pointer">
     <i class="material-icons">
       add
     </i>
-  </a>
+  </span>
 </td>

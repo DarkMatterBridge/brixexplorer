@@ -148,7 +148,7 @@ export class BidListComponent implements OnInit, OnChanges {
 
   checkIfOppBid(node: BNode): void {
     if (node.con?.startsWith('.')) {
-      node.con = node.con?.substr(0, node.con?.length - 1);
+      node.con = node.con?.substring(1, node.con?.length);
       node.ob = true;
     }
   }

@@ -104,12 +104,12 @@ export class BiddingSequence {
       this.bids[this.bids.length - 2].bid === 'P' && this.bids[this.bids.length - 1].bid === 'P';
   }
 
-  //
-  // importCanonicalSequence(nodes: BNode[]): void {
-  //   this.bids = nodes.map(node => node.bid);
-  //   console.log('-->' + this.bids);
-  //   this.determineLastContractBid();
-  // }
+
+  importCanonicalSequence(bids: DBid[]): void {
+    this.bids = bids
+    console.log('-->' + this.bids);
+    this.determineLastContractBid();
+  }
 
   determineLastContractBid(): void {
     const lastBid = this.bids.slice().reverse().find(b => b.bid.isContractBid());

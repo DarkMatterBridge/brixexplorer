@@ -1,6 +1,7 @@
 import {Component, DoCheck, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BNodeComposite} from "../model/BNodeComposite";
 import {BNodeSequence} from "../model/BNodeSequence";
+import {BiddingSequence} from "../model/BiddingSequence";
 
 @Component({
   selector: 'app-bnode-sequence-table',
@@ -16,11 +17,11 @@ export class BnodeSequenceTableComponent implements OnInit, DoCheck {
   @Input() bNodeSequence: BNodeSequence;
 
   numbers = new Array<number>();
-
   highestBnode: BNodeComposite | undefined;
-
   interventionPresent = false;
-  bnodes: BNodeComposite[] |undefined
+  bnodes: BNodeComposite[] | undefined
+
+  biddingSequence: BiddingSequence = new BiddingSequence()
 
   constructor() {
     this.bNodeSequence = new BNodeSequence();
@@ -47,22 +48,20 @@ export class BnodeSequenceTableComponent implements OnInit, DoCheck {
     if (this.bNodeSequence.getLast() != this.highestBnode) {
       this.interventionPresent = this.checkIntervention();
 
-      if (this.interventionPresent) {
-        // let max = this.bNodeSequence.getLength() / 4;
+      this.biddingSequence = new BiddingSequence()
+      this.biddingSequence.importCanonicalSequence(this.bNodeSequence.buildCanonicalSequence());
+      this.biddingSequence.dealer = 'W';
 
-        // this.bNodeSequence.compositeNodes.forEach( cn => {
-        //   if (cn.bnode.ob)
-        // })
+      if (this.interventionPresent) {
 
       } else {
-
         let max = this.bNodeSequence.getLength() / 2;
         this.numbers = [];
         for (let i = 0; i < max; i++)
           this.numbers[i] = i;
-        this.highestBnode = this.bNodeSequence.getLast();
-        alert("Intervention present: " + this.interventionPresent)
       }
+
+      this.highestBnode = this.bNodeSequence.getLast();
     }
   }
 
@@ -73,7 +72,6 @@ export class BnodeSequenceTableComponent implements OnInit, DoCheck {
   numberOwnBids(): number {
     return this.bNodeSequence.compositeNodes.filter(bid => bid.bnode.ob).length
   }
-
 
 
   nums(): number[] {

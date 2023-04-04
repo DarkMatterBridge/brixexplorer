@@ -1,0 +1,10 @@
+.wrapper {
+  display: grid; /* display: inline-grid;*/
+  grid-template-columns: 100px 1fr;
+  border: 1px solid;
+  background-color: gainsboro;
+}
+
+.item {
+  flex-shrink: 3; /* default 1 */
+}

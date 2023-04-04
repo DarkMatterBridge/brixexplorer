@@ -1,20 +1,25 @@
+<app-bnode-sequence-table (selectNode)="setBnode($event)" [bNodeSequence]="bNodeSequence"
+                          (bNodeSequenceEventEmitter)="activateDealView2($event)">
+</app-bnode-sequence-table>
+
 <div class="biddingPanel">
   <div class="topline">
         <app-bnode-sequence (selectNode)="setBnode($event)" [bNodeSequence]="bNodeSequence"
                             (bNodeSequenceEventEmitter)="activateDealView2($event)">
         </app-bnode-sequence>
     <div>
-      <a [routerLink]="" (click)="editable=!editable" matTooltip="Edit">
+      <span (click)="editable=!editable" matTooltip="Edit" class="pointer">
         <mat-icon *ngIf="editable" [ngStyle]="{'color':'red'}" aria-hidden="false" aria-label="Example home icon">edit
         </mat-icon>
         <mat-icon *ngIf="!editable" [ngStyle]="{'color':'black'}" aria-hidden="false" aria-label="Example home icon">
           edit
         </mat-icon>
-      </a>
+      </span>
 
-      <a *ngIf="editable" [routerLink]="" (click)="saveIntoLocalStorage()" matTooltip="Save to Browser Storage">
+      <span *ngIf="editable"  (click)="saveIntoLocalStorage()" matTooltip="Save to Browser Storage"
+      class = "pointer">
         <mat-icon>save</mat-icon>
-      </a>
+      </span>
 
       <mat-icon [matMenuTriggerFor]="menu2" style="text-align: right" class="pointer">more_vert</mat-icon>
     </div>
@@ -60,7 +65,7 @@
     <div>
       <span style="visibility: hidden"> --- </span>
       <span [ngClass]="{'opp': bnc.bnode.ob}" style="  font-size: 14pt;"
-            (click)="editBid()" (mouseover)="calcStatistics()" matTooltip="Number of Subnodes: {{noNodes}}">
+            (click)="editBidNew()" (mouseover)="calcStatistics()" matTooltip="Number of Subnodes: {{noNodes}}">
         <app-strain-symbol *ngIf="!bidEditable" [strain]="bnc.bid"></app-strain-symbol>
         <app-strain-symbol *ngIf="bidEditable" [strain]="bnc.bnode.bid"></app-strain-symbol>
       </span>
@@ -107,9 +112,6 @@
 
 </div>
 
-<app-bnode-sequence-table (selectNode)="setBnode($event)" [bNodeSequence]="bNodeSequence"
-                          (bNodeSequenceEventEmitter)="activateDealView2($event)">
-</app-bnode-sequence-table>
 
 
 <!--<div class="bidjar" *ngIf="dealViewActivated">-->

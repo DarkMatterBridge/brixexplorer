@@ -1,1 +1,23 @@
-<p>bidding-sequence works!</p>
+<!--<span *ngFor="let bid of biddingSequence.bids" > {{bid}}</span>-->
+
+<table class="tabl">
+  <tr class="header">
+    <td class="cell" [ngClass]="{'fett': biddingStart==0}">W</td>
+
+    <td class="cell" [ngClass]="{'fett': biddingStart==1}">N</td>
+    <td class="cell" [ngClass]="{'fett': biddingStart==2}">E</td>
+    <td class="cell" [ngClass]="{'fett': biddingStart==3}">S</td>
+  </tr>
+  <tr *ngFor="let i of numbers">
+    <td *ngFor="let j of [0,1,2,3]">
+      <span *ngIf="4*i+j < biddingEnd && 4*i+j>=biddingStart"
+            matTooltip="{{biddingSequence.bids[4*i+j-biddingStart].con}}">
+        <app-strain-symbol [strain]="(biddingSequence.bids[4*i+j-biddingStart].bid)"></app-strain-symbol>
+      </span>
+    </td>
+  </tr>
+
+</table>
+
+
+<!--https://www.bridgebase.com/myhands/fetchlin.php?id=1070643200&when_played=1617996516-->

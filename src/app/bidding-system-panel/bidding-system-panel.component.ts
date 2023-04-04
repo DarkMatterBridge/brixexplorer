@@ -1,10 +1,20 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import {BNode} from "../model/BNode";
 import {BNodeComposite} from "../model/BNodeComposite";
 import {BNodeSequence} from "../model/BNodeSequence";
 import {BridgeSystemManager} from "../service/bridge-system-manager";
 import {Subject} from "rxjs";
 import {FileService} from "../service/file.service";
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {BidEditComponent} from "../bid-edit/bid-edit.component";
+
+export interface DialogData {
+  bid: string;
+  condition: string;
+  description: string;
+  oppsBid: boolean;
+}
+
 
 @Component({
   selector: 'app-bidding-system-panel',
@@ -35,6 +45,7 @@ export class BiddingSystemPanelComponent implements OnInit {
 
   constructor(private bridgeSystemM: BridgeSystemManager,
               private fileService: FileService,
+              public dialog: MatDialog
               // private conditionManager: ConditionManager
   ) {
     // this.bridgeSystem = new BiddingSystem(bsm);
@@ -138,6 +149,23 @@ export class BiddingSystemPanelComponent implements OnInit {
     if (this.editable) {
       this.bidEditable = true;
     }
+  }
+
+  editBidNew(): void {
+    const dialogRef = this.dialog.open(BidEditComponent, {
+      data: {
+        bid: this.bnc.bnode.bid, description: this.bnc.bnode.desc,
+        condition: this.bnc.bnode.con, oppsBid: this.bnc.bnode.ob
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.bnc.bnode.bid = result.bid
+      this.bnc.bnode.desc = result.description
+      this.bnc.bnode.con = result.condition
+      this.bnc.bnode.ob = result.oppsBid
+    });
   }
 
 

@@ -15,11 +15,17 @@ import {StrainSymbolComponent} from './strain-symbol/strain-symbol.component';
 import {HttpClientModule} from "@angular/common/http";
 import {BidListComponent} from './bidding-system-panel/bid-list/bid-list.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+
+import {MatDialogModule} from '@angular/material/dialog';
+import {DialogModule} from '@angular/cdk/dialog';
+import {MatButtonModule} from '@angular/material/button';
+
 import { BidItemComponent } from './bidding-system-panel/bid-list/bid-item/bid-item.component';
 import {FormsModule} from "@angular/forms";
 import { BnodeSequenceComponent } from './bnode-sequence/bnode-sequence.component';
 import { BnodeSequenceTableComponent } from './bnode-sequence-table/bnode-sequence-table.component';
 import { BiddingSequenceComponent } from './bidding-sequence/bidding-sequence.component';
+import { BidEditComponent } from './bid-edit/bid-edit.component';
 
 
 @NgModule({
@@ -31,7 +37,8 @@ import { BiddingSequenceComponent } from './bidding-sequence/bidding-sequence.co
     BidItemComponent,
     BnodeSequenceComponent,
     BnodeSequenceTableComponent,
-    BiddingSequenceComponent
+    BiddingSequenceComponent,
+    BidEditComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +51,10 @@ import { BiddingSequenceComponent } from './bidding-sequence/bidding-sequence.co
     MatIconModule,
     MatTooltipModule,
     MatSnackBarModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule,
+    DialogModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
