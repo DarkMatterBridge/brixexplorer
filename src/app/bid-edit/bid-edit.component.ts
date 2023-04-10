@@ -9,10 +9,13 @@ import {DialogData} from "../bidding-system-panel/bidding-system-panel.component
 })
 export class BidEditComponent {
 
+  viewOnly: boolean
   constructor(
     public dialogRef: MatDialogRef<BidEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-  ) {}
+  ) {
+    this.viewOnly = data.viewOnly;
+  }
 
   onNoClick(): void {
     this.dialogRef.close();

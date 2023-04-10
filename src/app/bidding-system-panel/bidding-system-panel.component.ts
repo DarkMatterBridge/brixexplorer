@@ -13,6 +13,8 @@ export interface DialogData {
   condition: string;
   description: string;
   oppsBid: boolean;
+  viewOnly: boolean;
+  linkableNode: boolean;
 }
 
 
@@ -38,7 +40,7 @@ export class BiddingSystemPanelComponent implements OnInit {
   bNodeSequenceForDealView: BNodeSequence = new BNodeSequence();
 
   editable = false;
-  bidEditable = false;
+  // bidEditable = false;
   noNodes = 0;
 
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLElement>;
@@ -116,7 +118,6 @@ export class BiddingSystemPanelComponent implements OnInit {
     this.bNodeSequence.reset();
   }
 
-  ///
   markAsLinkable(): void {
     this.linkableBnodes.push(this.bnc.bnode);
   }
@@ -145,17 +146,21 @@ export class BiddingSystemPanelComponent implements OnInit {
     this.bNodeSequenceForDealView = {...bns} as BNodeSequence; // Attention> this spread construct removes all functions
   }
 
-  editBid(): void {
-    if (this.editable) {
-      this.bidEditable = true;
-    }
-  }
+  // editBid(): void {
+  //   if (this.editable) {
+  //     this.bidEditable = true;
+  //   }
+  // }
 
-  editBidNew(): void {
+  editBidNew(viewOnly: boolean): void {
     const dialogRef = this.dialog.open(BidEditComponent, {
       data: {
-        bid: this.bnc.bnode.bid, description: this.bnc.bnode.desc,
-        condition: this.bnc.bnode.con, oppsBid: this.bnc.bnode.ob
+        bid: this.bnc.bnode.bid,
+        description: this.bnc.bnode.desc,
+        condition: this.bnc.bnode.con,
+        oppsBid: this.bnc.bnode.ob,
+        viewOnly: viewOnly,
+        linkableNode: false, // todo get this info from system ???
       },
     });
 
@@ -165,6 +170,9 @@ export class BiddingSystemPanelComponent implements OnInit {
       this.bnc.bnode.desc = result.description
       this.bnc.bnode.con = result.condition
       this.bnc.bnode.ob = result.oppsBid
+      if (result.linkableNode) {
+        this.markAsLinkable()
+      }
     });
   }
 

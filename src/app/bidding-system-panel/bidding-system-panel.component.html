@@ -4,9 +4,9 @@
 
 <div class="biddingPanel">
   <div class="topline">
-        <app-bnode-sequence (selectNode)="setBnode($event)" [bNodeSequence]="bNodeSequence"
-                            (bNodeSequenceEventEmitter)="activateDealView2($event)">
-        </app-bnode-sequence>
+    <app-bnode-sequence (selectNode)="setBnode($event)" [bNodeSequence]="bNodeSequence"
+                        (bNodeSequenceEventEmitter)="activateDealView2($event)">
+    </app-bnode-sequence>
     <div>
       <span (click)="editable=!editable" matTooltip="Edit" class="pointer">
         <mat-icon *ngIf="editable" [ngStyle]="{'color':'red'}" aria-hidden="false" aria-label="Example home icon">edit
@@ -16,8 +16,8 @@
         </mat-icon>
       </span>
 
-      <span *ngIf="editable"  (click)="saveIntoLocalStorage()" matTooltip="Save to Browser Storage"
-      class = "pointer">
+      <span *ngIf="editable" (click)="saveIntoLocalStorage()" matTooltip="Save to Browser Storage"
+            class="pointer">
         <mat-icon>save</mat-icon>
       </span>
 
@@ -61,20 +61,20 @@
   </div>
 
 
-  <div *ngIf="!bidEditable" class="topline">
+  <div class="topline">
     <div>
       <span style="visibility: hidden"> --- </span>
-      <span [ngClass]="{'opp': bnc.bnode.ob}" style="  font-size: 14pt;"
-            (click)="editBidNew()" (mouseover)="calcStatistics()" matTooltip="Number of Subnodes: {{noNodes}}">
-        <app-strain-symbol *ngIf="!bidEditable" [strain]="bnc.bid"></app-strain-symbol>
-        <app-strain-symbol *ngIf="bidEditable" [strain]="bnc.bnode.bid"></app-strain-symbol>
+      <span [ngClass]="{'opp': bnc.bnode.ob}" style="  font-size: 14pt;" class="pointer"
+            (click)="editBidNew(!editable)" (mouseover)="calcStatistics()" matTooltip="Number of Subnodes: {{noNodes}}">
+        <app-strain-symbol [strain]="bnc.bid"></app-strain-symbol>
       </span>
       <span style="visibility: hidden"> - </span>
 
-      <span class="con" (click)="editBid()"> {{bnc.bnode.con}}</span>
+      <span class="con" (click)="editBidNew(!editable)"> {{bnc.bnode.con}}</span>
       <span class="desc"> {{bnc.bnode.desc}}</span>
 
     </div>
+
     <div class="line"></div>
     <div>
       <!--      <a [routerLink]="" (click)="editable=true" matTooltip="Edit">-->
@@ -91,16 +91,14 @@
   </div>
 
 
-  <div class="topline">
-
-    <span *ngIf="bidEditable">
-        <a [routerLink]="" (click)="bidEditable=false" matTooltip="Leave Edit">
-          <mat-icon>edit_off</mat-icon>
-        </a>
-      <!--        <app-node-simple-edit [bnode]="bnc.bnode"></app-node-simple-edit>-->
-      </span>
-
-  </div>
+<!--  <div class="topline">-->
+<!--    <span *ngIf="bidEditable">-->
+<!--        <a [routerLink]="" (click)="bidEditable=false" matTooltip="Leave Edit">-->
+<!--          <mat-icon>edit_off</mat-icon>-->
+<!--        </a>-->
+<!--      &lt;!&ndash;        <app-node-simple-edit [bnode]="bnc.bnode"></app-node-simple-edit>&ndash;&gt;-->
+<!--      </span>-->
+<!--  </div>-->
 
   <app-bid-list [bnc]="bnc" [subject]="subject" [editable]="editable"></app-bid-list>
 
@@ -111,7 +109,6 @@
 
 
 </div>
-
 
 
 <!--<div class="bidjar" *ngIf="dealViewActivated">-->
