@@ -7,6 +7,7 @@ import {Subject} from "rxjs";
 import {FileService} from "../service/file.service";
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {BidEditComponent} from "../bid-edit/bid-edit.component";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 export interface DialogData {
   bid: string;
@@ -28,7 +29,7 @@ export class BiddingSystemPanelComponent implements OnInit {
   baseNode: BNode = new BNode("base", [], "")
   bnc: BNodeComposite = new BNodeComposite(this.baseNode);
 
-  subject: Subject<BNodeComposite> = new Subject<BNodeComposite>();
+  $nodeAppended: Subject<BNodeComposite> = new Subject<BNodeComposite>();
   // bridgeSystem: BiddingSystem;
 
   uploadSubject: Subject<BNode> = new Subject<BNode>();
@@ -47,14 +48,15 @@ export class BiddingSystemPanelComponent implements OnInit {
 
   constructor(private bridgeSystemM: BridgeSystemManager,
               private fileService: FileService,
-              public dialog: MatDialog
+              public dialog: MatDialog,
+              private matSnackBar: MatSnackBar
               // private conditionManager: ConditionManager
   ) {
     // this.bridgeSystem = new BiddingSystem(bsm);
   }
 
   ngOnInit(): void {
-    this.subject.asObservable().subscribe(b => this.setBnodeFromBelow(b));
+    this.$nodeAppended.asObservable().subscribe(b => this.appendNodeFromBelow(b));
     this.resetSystem();
     this.loadFromLocalStorage();
     this.uploadSubject.subscribe(bn => this.setSystem(bn));
@@ -80,7 +82,7 @@ export class BiddingSystemPanelComponent implements OnInit {
 
   // 2) called from subject event, i.e. from included bid list below
 
-  setBnodeFromBelow(bnc?: BNodeComposite): void {
+  appendNodeFromBelow(bnc?: BNodeComposite): void {
     if (bnc === undefined) { // Does this ever occur?
       this.bnc = new BNodeComposite(this.baseNode);
       this.bNodeSequence.reset(); // instead of this.reset() ;
@@ -182,6 +184,7 @@ export class BiddingSystemPanelComponent implements OnInit {
   saveIntoLocalStorage(): void {
     const name = 'precision';
     this.fileService.saveIntoLocalStorage(name, this.baseNode);
+    this.matSnackBar.open(`System was saved to Browser Storage`, '', {duration: 3000});
   }
 
   loadFromLocalStorage(): void {
