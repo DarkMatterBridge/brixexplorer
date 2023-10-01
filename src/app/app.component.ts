@@ -9,9 +9,9 @@ export class AppComponent {
   title = 'brixplorer';
 
 
-  x = false
+  biddingSystem = false
 
   bidding() {
-    this.x = !this.x
+    this.biddingSystem = !this.biddingSystem
   }
 }
