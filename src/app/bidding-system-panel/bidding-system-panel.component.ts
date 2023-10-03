@@ -8,6 +8,7 @@ import {FileService} from "../service/file.service";
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {BidEditComponent} from "../bid-edit/bid-edit.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {DbConnectorService} from "../service/db-connector.service";
 
 export interface DialogData {
   bid: string;
@@ -49,7 +50,8 @@ export class BiddingSystemPanelComponent implements OnInit {
   constructor(private bridgeSystemM: BridgeSystemManager,
               private fileService: FileService,
               public dialog: MatDialog,
-              private matSnackBar: MatSnackBar
+              private matSnackBar: MatSnackBar,
+              // private dbConnectorService: DbConnectorService
               // private conditionManager: ConditionManager
   ) {
     // this.bridgeSystem = new BiddingSystem(bsm);
