@@ -11,6 +11,14 @@ class Testhand implements Hand {
   points(): number {
     return 0;
   }
+
+  isBalanced(): boolean {
+    return false;
+  }
+
+  isSemiBalanced(): boolean {
+    return false;
+  }
 }
 
 @Injectable({

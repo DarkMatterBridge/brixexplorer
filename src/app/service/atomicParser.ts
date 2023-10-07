@@ -26,6 +26,14 @@ export class AtomicParser {
       return this.parseForFalse(text)
     } catch (e) {
     }
+    try {
+      return this.parseForBalanced(text)
+    } catch (e) {
+    }
+    try {
+      return this.parseForSemiBalanced(text)
+    } catch (e) {
+    }
     throw new Error('Atomic expression could not be parsed');
   }
 
@@ -44,4 +52,21 @@ export class AtomicParser {
     }
     throw new Error('false could not be parsed');
   }
+
+  parseForBalanced(cond: string): HandChecker {
+    const a = /^(bal)$/.exec(cond);
+    if (a !== null) {
+      return (hand: Hand) => hand.isBalanced();
+    }
+    throw new Error('bal could not be parsed');
+  }
+  parseForSemiBalanced(cond: string): HandChecker {
+    const a = /^(sbal|semibal)$/.exec(cond);
+    if (a !== null) {
+      return (hand: Hand) => hand.isSemiBalanced();
+    }
+    throw new Error('bal could not be parsed');
+  }
+
+
 }
