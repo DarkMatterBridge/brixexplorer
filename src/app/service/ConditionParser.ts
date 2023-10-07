@@ -53,7 +53,7 @@ export class ConditionParser {
   }
 
   parseForBrackets(cond: string): HandChecker {
-    const r = /\((.*)\)/.exec(cond);
+    const r = /^\((.*)\)$/.exec(cond);
     if (r !== null) {
       const f = this.doParseWork(r[1].trim());
       return (hand: Hand) => f(hand);
@@ -95,10 +95,10 @@ export class ConditionParser {
   }
 
   parseForNegation(cond: string): HandChecker {
-    const r = /(!)(.*)/.exec(cond);
+    const r = /^!(.*)/.exec(cond);
     if (r !== null) {
       const f = this.doParseWork(r[1].trim());
-      return (hand: Hand) => f(hand);
+      return (hand: Hand) => !f(hand);
     }
     throw new Error('Negation could not be parsed');
   }

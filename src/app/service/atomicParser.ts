@@ -32,8 +32,7 @@ export class AtomicParser {
   parseForTrue(cond: string): HandChecker {
     const r = /^true$/.exec(cond);
     if (r !== null) {
-      alert(cond);
-      return (hand: Hand) => true;
+      return (hand) => true;
     }
     throw new Error('true could not be parsed');
   }
@@ -41,8 +40,7 @@ export class AtomicParser {
   parseForFalse(cond: string): HandChecker {
     const r = /^false$/.exec(cond);
     if (r !== null) {
-      alert(cond);
-      return (hand: Hand) => false;
+      return (hand) => false;
     }
     throw new Error('false could not be parsed');
   }

@@ -20,13 +20,20 @@ export class ConditionParserTesterService {
 
   re = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
 
-
   dummyHand = new Testhand()
-
 
   testCases = new Map<string, number[][]>([
     ['A,B', [[0, 0, 0], [0, 1, 0], [1, 1, 1]]],
+    ['!A,B', [[0, 0, 0], [0, 1, 1], [1, 1, 0]]],
     ['A or B', [[0, 0, 0], [1, 0, 1]]],
+    ['!A or B', [[0, 0, 1], [1, 0, 0]]],
+    ['A or B, C', [[0, 0, 0, 0], [1, 0, 0, 1], [0, 0, 1, 0], [0, 1, 1, 1]]],
+    ['A or (B, C)', [[0, 0, 0, 0], [1, 0, 0, 1], [0, 0, 1, 0], [0, 1, 1, 1]]],
+    ['(A or B), C', [[0, 0, 0, 0], [1, 0, 0, 0], [0, 0, 1, 0], [0, 1, 1, 1]]],
+    ['!(A or B), C', [[0, 0, 0, 0], [1, 0, 0, 0], [0, 0, 1, 1], [0, 1, 1, 0]]],
+    ['!(A or !B), C', [[0, 0, 0, 0], [1, 0, 0, 0], [0, 0, 1, 0], [0, 1, 1, 1]]],
+    ['(!(A or B), C)', [[0, 0, 0, 0], [1, 0, 0, 0], [0, 0, 1, 1], [0, 1, 1, 0]]],
+    ['!(!(A or B), C)', [[0, 0, 0, 1], [1, 0, 0, 1], [0, 0, 1, 0], [0, 1, 1, 1]]],
   ])
 
   // tests = ['A,B' => [0, 0, 0]]
@@ -49,12 +56,12 @@ export class ConditionParserTesterService {
 
   runTest(text: string, cases: number[]): boolean {
     let replacedText = this.getExpression(text, cases);
-    try {
-      let hc: HandChecker = this.callParser(replacedText);
-      return hc(this.dummyHand) ? (cases[cases.length - 1] === 1) : cases[cases.length - 1] == 0;
-    } catch (e) {
-      return false
-    }
+    // try {
+    let hc: HandChecker = this.callParser(replacedText);
+    return hc(this.dummyHand) ? (cases[cases.length - 1] === 1) : cases[cases.length - 1] == 0;
+    // } catch (e) {
+    //   return false
+    // }
   }
 
   runAllTests(): Map<string, string[]> {
@@ -63,8 +70,12 @@ export class ConditionParserTesterService {
     this.testCases.forEach((cases, condition) => {
       const nnn: string[] = [];
       cases.forEach((c: number[]) => {
-        if (!this.runTest(condition, c))
-          nnn.push(this.getExpression(condition, c)+"->"+c[c.length-1]);
+        try {
+          if (!this.runTest(condition, c))
+            nnn.push(this.getExpression(condition, c) + " => " + c[c.length - 1]);
+        } catch(e) {
+          nnn.push(this.getExpression(condition, c) + " => " + "Parsing Error");
+        }
       })
       result.set(condition, nnn);
     });
@@ -72,7 +83,7 @@ export class ConditionParserTesterService {
   }
 
   callParser(text: string): HandChecker {
-      return this.parser.parse(text)
+    return this.parser.parse(text)
   }
 
 }
