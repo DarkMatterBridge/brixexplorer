@@ -12,7 +12,7 @@
   <mat-icon [matMenuTriggerFor]="entries" class="pointer">menu</mat-icon>
 
   <span class="example-spacer"></span>
-  <span> Hi</span>
+  <span class="ic" (click)="configuration=true">	<mat-icon> house</mat-icon></span>
 
 
   <mat-menu #entries="matMenu">
@@ -40,5 +40,8 @@
 <div class="main">
   <div  [ngClass]="{'visable': biddingSystem, 'nonvisable' : !biddingSystem }">
     <app-bidding-system-panel></app-bidding-system-panel>
+  </div>
+  <div  [ngClass]="{'visable': configuration, 'nonvisable' : !configuration }">
+    <app-config-maintenance></app-config-maintenance>
   </div>
 </div>

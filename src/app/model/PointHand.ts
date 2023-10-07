@@ -1,3 +1,5 @@
+import {Hand} from "./Hand";
+
 class PointHand implements Hand {
 
   p: number

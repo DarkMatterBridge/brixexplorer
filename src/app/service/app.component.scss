@@ -11,7 +11,7 @@
 
 .pic {
   background: rgb(40,40,40);
-  background-image: url("./../assets/suits.jpg");
+  background-image: url("src/assets/suits.jpg");
   background-size: 400px;
   background-blend-mode: luminosity;
   opacity: 0.1;
@@ -33,7 +33,7 @@
 }
 
 .icon {
-  background-image: url("./../assets/suits.jpg");
+  background-image: url("src/assets/suits.jpg");
   background-size: 100%;
   background-repeat:no-repeat;
   background-position: center center;

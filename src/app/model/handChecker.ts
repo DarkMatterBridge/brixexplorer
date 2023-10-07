@@ -1,1 +1,3 @@
-type HandChecker = (x: Hand) => boolean;
+import {Hand} from "./Hand";
+
+export type HandChecker = (x: Hand) => boolean;

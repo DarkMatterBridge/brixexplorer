@@ -26,6 +26,7 @@ import { BnodeSequenceComponent } from './bnode-sequence/bnode-sequence.componen
 import { BnodeSequenceTableComponent } from './bnode-sequence-table/bnode-sequence-table.component';
 import { BiddingSequenceComponent } from './bidding-sequence/bidding-sequence.component';
 import { BidEditComponent } from './bid-edit/bid-edit.component';
+import { ConfigMaintenanceComponent } from './config-maintenance/config-maintenance.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { BidEditComponent } from './bid-edit/bid-edit.component';
     BnodeSequenceComponent,
     BnodeSequenceTableComponent,
     BiddingSequenceComponent,
-    BidEditComponent
+    BidEditComponent,
+    ConfigMaintenanceComponent
   ],
   imports: [
     BrowserModule,

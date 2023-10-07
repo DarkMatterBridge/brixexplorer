@@ -1,13 +1,20 @@
 import {Injectable} from "@angular/core";
+import {HandChecker} from "../model/handChecker";
+import {Hand} from "../model/Hand";
+import {AtomicParser} from "./atomicParser";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConditionParser {
 
-  parse(text: string): HandChecker {
-    const trimmedText = text.trim();
+  constructor(private atomicParser: AtomicParser) {
+  }
 
+
+  parse(text: string): HandChecker {
+
+    const trimmedText = text.trim();
     if (trimmedText.length === 0) {
       return () => true;
     }
@@ -32,6 +39,16 @@ export class ConditionParser {
       return this.parseForAnd(text)
     } catch (e) {
     }
+    try {
+      return this.parseForNegation(text)
+    } catch (e) {
+    }
+
+    try {
+      return this.atomicParser.parse(text);
+    } catch (e) {
+    }
+
     throw new Error('Expression could not be parsed');
   }
 

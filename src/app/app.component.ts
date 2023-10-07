@@ -3,13 +3,15 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./service/app.component.scss']
 })
 export class AppComponent {
   title = 'brixplorer';
 
 
   biddingSystem = false
+  configuration = false
+
 
   bidding() {
     this.biddingSystem = !this.biddingSystem
