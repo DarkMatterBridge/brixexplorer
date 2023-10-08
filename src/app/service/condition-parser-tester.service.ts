@@ -64,12 +64,8 @@ export class ConditionParserTesterService {
 
   runTest(text: string, cases: number[]): boolean {
     let replacedText = this.getExpression(text, cases);
-    // try {
     let hc: HandChecker = this.callParser(replacedText);
     return hc(this.dummyHand) ? (cases[cases.length - 1] === 1) : cases[cases.length - 1] == 0;
-    // } catch (e) {
-    //   return false
-    // }
   }
 
   runAllTests(): Map<string, string[]> {
@@ -93,5 +89,7 @@ export class ConditionParserTesterService {
   callParser(text: string): HandChecker {
     return this.parser.parse(text)
   }
+
+
 
 }

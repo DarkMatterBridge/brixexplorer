@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {BridgeSystemManager} from "../service/bridge-system-manager";
 import {ConfigurationService} from "../service/configuration.service";
 import {ConditionParserTesterService} from "../service/condition-parser-tester.service";
+import {AtomicParserTesterService} from "../service/atomic-parser-tester.service";
 
 @Component({
   selector: 'app-config-maintenance',
@@ -11,13 +11,17 @@ import {ConditionParserTesterService} from "../service/condition-parser-tester.s
 export class ConfigMaintenanceComponent implements OnInit {
 
   constructor(private configurationService: ConfigurationService,
-              private cpts: ConditionParserTesterService) {
+              private cpts: ConditionParserTesterService,
+              private apts: AtomicParserTesterService,
+  ) {
 
   }
 
   ngOnInit(): void {
     let x = this.cpts.runAllTests();
     console.log(x);
+    let y = this.apts.runAllTests();
+    console.log(y);
   }
 
   testConditioningParser() {

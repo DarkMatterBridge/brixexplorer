@@ -16,4 +16,12 @@ class PointHand implements Hand {
     return 0;
   }
 
+  isBalanced(): boolean {
+    return false;
+  }
+
+  isSemiBalanced(): boolean {
+    return false;
+  }
+
 }
