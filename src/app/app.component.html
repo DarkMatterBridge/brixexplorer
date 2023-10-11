@@ -7,6 +7,7 @@
   <span class="m4"> </span>
 
   <span class="ic" (click)="bidding()">	<mat-icon> inventory</mat-icon></span>
+  <span class="ic" (click)="board=true">	board <mat-icon> grid-large</mat-icon></span>
 
 
   <mat-icon [matMenuTriggerFor]="entries" class="pointer">menu</mat-icon>
@@ -40,6 +41,9 @@
 <div class="main">
   <div  [ngClass]="{'visable': biddingSystem, 'nonvisable' : !biddingSystem }">
     <app-bidding-system-panel></app-bidding-system-panel>
+  </div>
+  <div  [ngClass]="{'visable': board, 'nonvisable' : !board }">
+    <app-board></app-board>
   </div>
   <div  [ngClass]="{'visable': configuration, 'nonvisable' : !configuration }">
     <app-config-maintenance></app-config-maintenance>

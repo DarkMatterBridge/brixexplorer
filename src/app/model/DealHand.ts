@@ -1,6 +1,6 @@
 import {Hand} from "./Hand";
 
-export class RealHand implements Hand {
+export class DealHand implements Hand {
 
   cards: number[];
 

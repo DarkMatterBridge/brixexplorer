@@ -27,6 +27,10 @@ import { BnodeSequenceTableComponent } from './bnode-sequence-table/bnode-sequen
 import { BiddingSequenceComponent } from './bidding-sequence/bidding-sequence.component';
 import { BidEditComponent } from './bid-edit/bid-edit.component';
 import { ConfigMaintenanceComponent } from './config-maintenance/config-maintenance.component';
+import { HandComponent } from './hand/hand.component';
+import { DealComponent } from './deal/deal.component';
+import { DoubleDummyTricksComponent } from './double-dummy-tricks/double-dummy-tricks.component';
+import { BoardComponent } from './board/board.component';
 
 
 @NgModule({
@@ -40,7 +44,11 @@ import { ConfigMaintenanceComponent } from './config-maintenance/config-maintena
     BnodeSequenceTableComponent,
     BiddingSequenceComponent,
     BidEditComponent,
-    ConfigMaintenanceComponent
+    ConfigMaintenanceComponent,
+    HandComponent,
+    DealComponent,
+    DoubleDummyTricksComponent,
+    BoardComponent
   ],
   imports: [
     BrowserModule,

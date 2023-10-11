@@ -1,0 +1,7 @@
+<div *ngFor="let suit of cards.slice().reverse(); let i = index">
+
+  <app-strain-symbol [suitNo]="3-i"></app-strain-symbol>
+  <span *ngFor="let card of suit"> {{card}}</span>
+</div>
+
+

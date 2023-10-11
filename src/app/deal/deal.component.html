@@ -1,0 +1,66 @@
+<table>
+  <tr>
+    <td>
+      <div class="board">
+        <table>
+          <tr>
+            <td>
+
+<!--              <input  class="file-input" #fileInput type="file" accept=".lin" (change)="loadFile(fileInput)">-->
+
+<!--              <button (click)="fileInput.click()">-->
+<!--                <mat-icon aria-hidden="false" aria-label="Example home icon">upload</mat-icon>-->
+<!--              </button>-->
+
+<!--              <button (click)="emitBiddingSequence()">-->
+<!--                <mat-icon aria-hidden="false" aria-label="Example home icon">grade</mat-icon>-->
+<!--              </button>-->
+
+<!--              &lt;!&ndash;              <span (click)="save()"> Save</span><span (click)="load()"> Load</span>&ndash;&gt;-->
+            </td>
+            <td>{{players[2]}}
+              <app-hand [cards]="cards[2]"></app-hand>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>{{players[1]}}
+              <app-hand [cards]="cards[1]"></app-hand>
+            </td>
+            <td></td>
+            <td>{{players[3]}}
+              <app-hand [cards]="cards[3]"></app-hand>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>{{players[0]}}
+              <app-hand [cards]="cards[0]"></app-hand>
+            </td>
+            <td>
+              <app-double-dummy-tricks ></app-double-dummy-tricks> //TODO
+            </td>
+          </tr>
+        </table>
+      </div>
+    </td>
+  <tr>
+<!--    <td>-->
+<!--      &lt;!&ndash;      Dealer: {{board.biddingSequence.dealer}}&ndash;&gt;-->
+<!--      <div class="bidding">-->
+<!--        <div>-->
+<!--          <app-bidding-sequence [biddingSequence]="board.biddingSequence"-->
+<!--                                [count]="board.biddingSequence.bids.length+1"></app-bidding-sequence>-->
+<!--        </div>-->
+<!--        <div class="pointer" (click)="biddingBoxVisible = !biddingBoxVisible">B</div>-->
+<!--        <div>-->
+<!--          <app-biddingbox *ngIf="biddingBoxVisible" [biddingSequence]="board.biddingSequence"-->
+<!--                          ($addBid)="addBid($event)"></app-biddingbox>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--    </td>-->
+<!--    <td>-->
+<!--    </td>-->
+  </tr>
+</table>
