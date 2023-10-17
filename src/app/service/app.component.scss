@@ -53,11 +53,13 @@
 }
 
 .visable {
-  visibility: visible;
+  //visibility: visible;
+  display: inline;
 }
 
 .nonvisable {
-  visibility: hidden;
+  //visibility: hidden;
+  display: none;
 }
 
 .example-spacer {

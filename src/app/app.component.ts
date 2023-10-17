@@ -12,6 +12,7 @@ export class AppComponent {
   biddingSystem = false
   configuration = false
   board = false
+  condition = false
 
 
   bidding() {

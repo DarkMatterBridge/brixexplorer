@@ -1,4 +1,3 @@
-// import {Board} from "./Board";
 import {DealHand} from "./DealHand";
 
 export class Deal {
@@ -31,6 +30,20 @@ export class Deal {
     return this.value[n];
   }
 
+  shuffle1Hand() {
+    this.doShuffle(52)
+  }
+
+  doShuffle(n: Number) {
+    for (var i = 0; i < n; i++) {
+      var z = Math.floor(Math.random() * (this.cards.length - i) + i);
+      let cardS = this.cards[z];
+      this.cards[z] = this.cards[i];
+      this.cards[i] = cardS;
+      // this.cards[z], this.cards[i] = this.cards[i], this.cards[z];
+    }
+  }
+
   shuffle() {
     for (var i = 0; i < this.cards.length; i++) {
       var z = Math.floor(Math.random() * (this.cards.length - i) + i);
@@ -57,15 +70,15 @@ export class Deal {
   // }
 
   getSortedHand(d: number): number[] {
-    return this.cards.slice(d * 13 - 13, d * 13).sort((i, j) => (j - i));
+    return this.cards.slice(d * 13, d * 13 + 13).sort((i, j) => (j - i));
   }
 
   getHandX(d: number): number[] {
-    return this.cards.slice(d * 13 - 13, d * 13);
+    return this.cards.slice(d * 13, d * 13 + 13);
   }
 
   getHand(d: number): DealHand {
-    this.hand[d].cards = this.cards.slice(d * 13 - 13, d * 13);
+    this.hand[d].cards = this.cards.slice(d * 13, d * 13 + 13);
     return this.hand[d];
   }
 

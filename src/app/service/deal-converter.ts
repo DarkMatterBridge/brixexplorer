@@ -17,7 +17,7 @@ export class DealConverter {
 
     for (let d = 0; d < 4; d++) {
       // let c = deal.cards.slice(d * 13, d * 13 + 13);
-      let c = deal.getSortedHand(d+1);
+      let c = deal.getSortedHand(d);
       cards[d] = [];
       cards[d][0] = c.filter(x => x < 13).map(y => this.value[y%13])
       cards[d][1] = c.filter(x => x > 12 && x < 26).map(y => this.value[y%13])

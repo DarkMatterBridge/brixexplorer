@@ -31,6 +31,9 @@ import { HandComponent } from './hand/hand.component';
 import { DealComponent } from './deal/deal.component';
 import { DoubleDummyTricksComponent } from './double-dummy-tricks/double-dummy-tricks.component';
 import { BoardComponent } from './board/board.component';
+import { ConditionEntryComponent } from './condition-entry/condition-entry.component';
+import { ConditionsEntryComponent } from './conditions-entry/conditions-entry.component';
+import { OneHandGeneratorComponent } from './one-hand-generator/one-hand-generator.component';
 
 
 @NgModule({
@@ -48,7 +51,10 @@ import { BoardComponent } from './board/board.component';
     HandComponent,
     DealComponent,
     DoubleDummyTricksComponent,
-    BoardComponent
+    BoardComponent,
+    ConditionEntryComponent,
+    ConditionsEntryComponent,
+    OneHandGeneratorComponent
   ],
   imports: [
     BrowserModule,

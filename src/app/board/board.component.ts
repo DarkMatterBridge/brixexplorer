@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Deal} from "../model/Deal";
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-board',
@@ -8,11 +9,16 @@ import {Deal} from "../model/Deal";
 })
 export class BoardComponent {
 
+  subject = new Subject<null>()
   deal: Deal = new Deal()
-  players = ["A","B","C","D","E"]
+  players = ["Adam", "Bree", "Cie", "Dora", "Emil"]
 
   constructor() {
     this.deal.shuffle()
+     }
+
+  shuffle() {
+    this.subject.next(null)
   }
 
 }
