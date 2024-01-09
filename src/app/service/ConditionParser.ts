@@ -26,32 +26,45 @@ export class ConditionParser {
     try {
       return this.parseForBrackets(text)
     } catch (e) {
+      this.showError(e)
     }
     try {
       return this.parseForPrioAnd(text)
     } catch (e) {
+      this.showError(e)
     }
     try {
       return this.parseForOr(text)
     } catch (e) {
+      this.showError(e)
     }
     try {
       return this.parseForAnd(text)
     } catch (e) {
+      this.showError(e)
     }
     try {
       return this.parseForNegation(text)
     } catch (e) {
+      this.showError(e)
     }
 
     try {
       return this.atomicParser.parse(text);
     } catch (e) {
+      this.showError(e)
     }
 
     throw new Error('Expression could not be parsed');
   }
 
+  showError(e: any) {
+    if (typeof e === "string") {
+      console.log(e.toUpperCase()) // works, `e` narrowed to string
+    } else if (e instanceof Error) {
+      console.log(e.message)// works, `e` narrowed to Error
+    }
+  }
   parseForBrackets(cond: string): HandChecker {
     const r = /^\((.*)\)$/.exec(cond);
     if (r !== null) {

@@ -19,6 +19,12 @@ class Testhand implements Hand {
   isSemiBalanced(): boolean {
     return false;
   }
+
+  cardsInSuit(n: number): number {
+    return 0;
+  }
+
+
 }
 
 @Injectable({

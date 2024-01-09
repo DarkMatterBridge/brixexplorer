@@ -22,18 +22,20 @@ export class ConditionEntryComponent {
   constructor(private conditionParser: ConditionParser) {
   }
 
-  check(): boolean {
+  check() {
+    this.doCheck()
+    this.sp$.next(this.ok)
+    if (this.ok)
+      this.hg$.next(this.handChecker)
+  }
+
+  doCheck() {
     try {
       this.handChecker = this.conditionParser.parse(this.condition)
+      this.ok = true
     } catch (e) {
       this.ok = false
-      this.sp$.next(this.ok)
-      return false
     }
-    this.ok = true
-    this.hg$.next(this.handChecker)
-    this.sp$.next(this.ok)
-    return true
   }
 
 }

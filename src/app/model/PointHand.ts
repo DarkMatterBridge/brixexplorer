@@ -24,4 +24,8 @@ class PointHand implements Hand {
     return false;
   }
 
+  cardsInSuit(n: number): number {
+    return 1;
+  }
+
 }

@@ -11,7 +11,7 @@ import {DealConverter} from "../service/deal-converter";
 })
 export class OneHandGeneratorComponent implements OnInit {
 
-  maxTries = 1000;
+  maxTries = 1000000;
   recentTries = 0;
   shufflePossible = true;
   cards = new Array<Array<Array<string>>>();
@@ -40,11 +40,11 @@ export class OneHandGeneratorComponent implements OnInit {
       do {
         this.deal.shuffle1Hand()
         n++;
-        console.log(n);
       } while (!this.handChecker(this.deal.getHand(0)) && n < this.maxTries)
       this.recentTries = n
       this.generated = true
-      this.cards = this.converter.getIndividualCards(this.deal);
+      if (this.recentTries != this.maxTries)
+        this.cards = this.converter.getIndividualCards(this.deal);
       // this.deal.getSortedHand(0)
     }
   }
