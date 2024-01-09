@@ -16,6 +16,8 @@ export class ConditionEntryComponent {
 
   @Input()
   hg$ = new Subject<HandChecker>()
+  @Input()
+  sp$ = new Subject<boolean>()
 
   constructor(private conditionParser: ConditionParser) {
   }
@@ -25,10 +27,12 @@ export class ConditionEntryComponent {
       this.handChecker = this.conditionParser.parse(this.condition)
     } catch (e) {
       this.ok = false
+      this.sp$.next(this.ok)
       return false
     }
     this.ok = true
     this.hg$.next(this.handChecker)
+    this.sp$.next(this.ok)
     return true
   }
 

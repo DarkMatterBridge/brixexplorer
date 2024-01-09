@@ -12,12 +12,14 @@ import {DealConverter} from "../service/deal-converter";
 export class OneHandGeneratorComponent implements OnInit {
 
   maxTries = 1000;
+  recentTries = 0;
   shufflePossible = true;
   cards = new Array<Array<Array<string>>>();
   generated = false;
 
-  @Output()
+  // @Output()
   hg$ = new Subject<HandChecker>()
+  sp$ = new Subject<boolean>()
 
   handChecker: HandChecker = () => true;
 
@@ -29,6 +31,7 @@ export class OneHandGeneratorComponent implements OnInit {
 
   ngOnInit() {
     this.hg$.subscribe(hg => this.handChecker = hg)
+    this.sp$.subscribe(sp => this.shufflePossible = sp)
   }
 
   shuffle() {
@@ -39,13 +42,11 @@ export class OneHandGeneratorComponent implements OnInit {
         n++;
         console.log(n);
       } while (!this.handChecker(this.deal.getHand(0)) && n < this.maxTries)
-      alert("shuffle finished: " + n)
+      this.recentTries = n
       this.generated = true
-     this.cards =  this.converter.getIndividualCards(this.deal);
+      this.cards = this.converter.getIndividualCards(this.deal);
       // this.deal.getSortedHand(0)
     }
-
   }
-
 
 }
