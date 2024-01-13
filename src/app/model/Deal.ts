@@ -17,6 +17,9 @@ export class Deal {
       this.cards[i] = i;
     }
     this.hand[0] = new DealHand([]);
+    this.hand[1] = new DealHand([]);
+    this.hand[2] = new DealHand([]);
+    this.hand[3] = new DealHand([]);
   }
 
   card(c: number) {

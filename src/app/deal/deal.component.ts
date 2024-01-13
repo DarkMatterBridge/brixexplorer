@@ -13,8 +13,8 @@ export class DealComponent implements OnInit {
   @Input()
   players = ["", "", "", ""]
 
-  @Input()
-  subject!: Subject<null>;
+  // @Input()
+  // subject!: Subject<null>;
 
   cards = new Array<Array<Array<string>>>();
 
@@ -23,7 +23,7 @@ export class DealComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.subject.subscribe( ()=> this.shuffle())
+    // this.subject.subscribe( ()=> this.shuffle())
   }
 
   _deal: Deal
@@ -35,13 +35,13 @@ export class DealComponent implements OnInit {
 
   set deal(deal: Deal) {
     this._deal = deal;
-    this.cards = this.converter.getIndividualCards(deal);
-  }
-
-  shuffle() {
-    this.deal.shuffle()
     this.distributeCards()
   }
+
+  // shuffle() {
+  //   this.deal.shuffle()
+  //   this.distributeCards()
+  // }
 
   distributeCards() {
     this.cards = this.converter.getIndividualCards(this.deal);

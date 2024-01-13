@@ -1,2 +1,39 @@
-<app-deal [deal]="deal" [players]="players" [subject]="subject"></app-deal>
-<button (click)="shuffle()"> Shuffle </button>
+<script src="board.component.ts"></script>
+<div >
+  <app-deal [deal]="deal" [players]="players" ></app-deal>
+  <div class="white">
+  <table class="dark" >
+    <tr>
+      <td> South:</td>
+      <td>
+        <app-condition-entry></app-condition-entry>
+      </td>
+    </tr>
+    <tr>
+      <td> West:</td>
+      <td>
+        <app-condition-entry></app-condition-entry>
+      </td>
+    </tr>
+    <tr>
+      <td> North:</td>
+      <td>
+        <app-condition-entry></app-condition-entry>
+      </td>
+    </tr>
+    <tr>
+      <td> East:</td>
+      <td>
+        <app-condition-entry></app-condition-entry>
+      </td>
+    </tr>
+  </table>
+  </div>
+
+  <button (click)="shuffle()" [disabled]="!isShufflePossible()"> Shuffle
+  </button>
+
+  <span *ngIf="!busy" class="white"> Hands generated: {{recentTries}}</span>
+  <mat-spinner  *ngIf="busy"></mat-spinner>
+
+</div>

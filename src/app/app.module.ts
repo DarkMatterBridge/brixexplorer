@@ -19,6 +19,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatDialogModule} from '@angular/material/dialog';
 import {DialogModule} from '@angular/cdk/dialog';
 import {MatButtonModule} from '@angular/material/button';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { BidItemComponent } from './bidding-system-panel/bid-list/bid-item/bid-item.component';
 import {FormsModule} from "@angular/forms";
@@ -70,7 +71,7 @@ import { OneHandGeneratorComponent } from './one-hand-generator/one-hand-generat
     FormsModule,
     MatDialogModule,
     DialogModule,
-    MatButtonModule
+    MatButtonModule,MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

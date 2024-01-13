@@ -40,6 +40,13 @@ export class AtomicParserTesterService {
           [[0, 1, 2, 3, 13, 14, 15, 16, 26, 27, 28, 29, 51], true],
         ])],
 
+      ['16+', new Map<number[], boolean>([
+        [[c2, c3, c4, c5, c6, c7, c8, c9, ct, cj, cq, ck, ca], false],
+        [[c2,c3, c4, d2, d3, d4, h2, h3, h4, s3, s4, s5, s7], false],
+        [[c2, c3, c4, d2, d3, d4, ca, da, ha, sa, s3, s4, sk], true],
+      ])],
+
+
       ]
     );
 

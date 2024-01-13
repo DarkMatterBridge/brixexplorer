@@ -1,8 +1,10 @@
-import {Component, OnInit, Output} from '@angular/core';
+import {Component, OnInit, Output, ViewChild} from '@angular/core';
 import {HandChecker} from "../model/handChecker";
 import {Subject} from "rxjs";
 import {Deal} from "../model/Deal";
 import {DealConverter} from "../service/deal-converter";
+import {ConditionEntryComponent} from "../condition-entry/condition-entry.component";
+import {Dealer} from "../service/dealer";
 
 @Component({
   selector: 'app-one-hand-generator',
@@ -11,6 +13,8 @@ import {DealConverter} from "../service/deal-converter";
 })
 export class OneHandGeneratorComponent implements OnInit {
 
+  @ViewChild(ConditionEntryComponent)
+  conditionEntryComponent: ConditionEntryComponent | undefined
   maxTries = 1000000;
   recentTries = 0;
   shufflePossible = true;
@@ -25,7 +29,8 @@ export class OneHandGeneratorComponent implements OnInit {
 
   deal: Deal = new Deal()
 
-  constructor(private converter: DealConverter) {
+  constructor(private dealer: Dealer,
+              private converter: DealConverter) {
 
   }
 
@@ -34,18 +39,31 @@ export class OneHandGeneratorComponent implements OnInit {
     this.sp$.subscribe(sp => this.shufflePossible = sp)
   }
 
-  shuffle() {
-    if (this.shufflePossible) {
+  shuffleOld() {
+    if (this.conditionEntryComponent?.ok) {
       let n = 0;
       do {
         this.deal.shuffle1Hand()
         n++;
-      } while (!this.handChecker(this.deal.getHand(0)) && n < this.maxTries)
+      } while (!this.conditionEntryComponent.handChecker(this.deal.getHand(0)) && n < this.maxTries)
       this.recentTries = n
       this.generated = true
       if (this.recentTries != this.maxTries)
         this.cards = this.converter.getIndividualCards(this.deal);
       // this.deal.getSortedHand(0)
+    }
+  }
+
+  shuffle() {
+    if (this.conditionEntryComponent?.ok) {
+      let generatedDeal = this.dealer.shuffle1(this.conditionEntryComponent.handChecker, this.maxTries)
+      if (generatedDeal === undefined) {
+      } else {
+        this.generated = true
+        this.recentTries = generatedDeal.generationNo
+        this.deal = generatedDeal
+        this.cards = this.converter.getIndividualCards(this.deal);
+      }
     }
   }
 
