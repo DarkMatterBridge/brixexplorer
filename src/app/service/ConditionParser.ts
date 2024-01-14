@@ -1,20 +1,16 @@
-import {Injectable} from "@angular/core";
 import {HandChecker} from "../model/handChecker";
 import {Hand} from "../model/Hand";
-import {AtomicParser} from "./atomicParser";
+import {AtomicParser2} from "./atomicParser2";
 
-@Injectable({
-  providedIn: 'root'
-})
 export class ConditionParser {
 
-  constructor(private atomicParser: AtomicParser) {
+  constructor(private atomicParser: AtomicParser2) {
   }
-
 
   parse(text: string): HandChecker {
 
     const trimmedText = text.trim();
+    console.log(trimmedText)
     if (trimmedText.length === 0) {
       return () => true;
     }
@@ -22,6 +18,7 @@ export class ConditionParser {
   }
 
   doParseWork(text: string): HandChecker {
+    console.log(text)
 
     try {
       return this.parseForBrackets(text)

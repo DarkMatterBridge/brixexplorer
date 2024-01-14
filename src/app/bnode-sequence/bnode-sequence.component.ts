@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BNodeSequence} from '../model/BNodeSequence';
 import {BNodeComposite} from '../model/BNodeComposite';
 import {ConditionManager} from '../service/ConditionManager';
+import {IntraCommunicationService} from "../service/intra-communication.service";
 
 @Component({
   selector: 'app-bnode-sequence',
@@ -18,7 +19,7 @@ export class BnodeSequenceComponent implements OnInit {
 
   @Input() bNodeSequence: BNodeSequence;
 
-  constructor(private conditionManager: ConditionManager) {
+  constructor(private conditionManager: ConditionManager, private intraCommunicationService: IntraCommunicationService) {
     this.bNodeSequence = new BNodeSequence();
   }
 
@@ -48,8 +49,8 @@ export class BnodeSequenceComponent implements OnInit {
 
   emitSequence(): void {
     this.rebuildBncSequence();  // needed in case of changes in e.g. conditions
-    this.bNodeSequence.buildCanonicalSequence();
-    this.bNodeSequenceEventEmitter.emit(this.bNodeSequence);
+    this.intraCommunicationService.push(this.bNodeSequence.buildCanonicalSequence())
+    this.bNodeSequenceEventEmitter.emit(this.bNodeSequence); //todo remove since obsolete
   }
 
   generateRandomSequenceFromIndex(): void {

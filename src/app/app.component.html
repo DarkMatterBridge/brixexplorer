@@ -41,10 +41,10 @@
 
 <div class="line"></div>
 <div class="main">
-  <div [ngClass]="{'visable': biddingSystem, 'nonvisable' : !biddingSystem }">
+  <div [ngClass]="{'visable bidjar': biddingSystem, 'nonvisable' : !biddingSystem }" >
     <app-bidding-system-panel></app-bidding-system-panel>
   </div>
-  <div [ngClass]="{'visable': board, 'nonvisable' : !board }">
+  <div [ngClass]="{'visable bidjar': board, 'nonvisable' : !board }" >
     <app-board></app-board>
   </div>
   <div [ngClass]="{'visable': configuration, 'nonvisable' : !configuration }">

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ConditionParser} from "./ConditionParser";
+import {ParserService} from "./parser.service";
 import {Hand} from "../model/Hand";
 import {HandChecker} from '../model/handChecker';
 
@@ -52,7 +52,7 @@ export class ConditionParserTesterService {
 
   // tests = ['A,B' => [0, 0, 0]]
 
-  constructor(private parser: ConditionParser) {
+  constructor(private parser: ParserService) {
   }
 
   transform(n: number): string {

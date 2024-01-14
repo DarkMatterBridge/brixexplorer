@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {ConditionParser} from "../service/ConditionParser";
+import {ParserService} from "../service/parser.service";
 import {HandChecker} from "../model/handChecker";
 import {Subject} from "rxjs";
 
@@ -19,7 +19,7 @@ export class ConditionEntryComponent {
   @Input()
   sp$ = new Subject<boolean>()
 
-  constructor(private conditionParser: ConditionParser) {
+  constructor(private conditionParser: ParserService) {
   }
 
   check() {

@@ -22,6 +22,13 @@ export class Deal {
     this.hand[3] = new DealHand([]);
   }
 
+  static getDeal(deal: Deal): Deal{
+    let newDeal = new Deal()
+    newDeal.cards = deal.cards
+    return newDeal
+  }
+
+
   card(c: number) {
     let n = c % 13;
     let suit: number = Math.floor(c / 13);

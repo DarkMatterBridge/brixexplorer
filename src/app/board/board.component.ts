@@ -4,7 +4,8 @@ import {Subject} from "rxjs";
 import {ConditionEntryComponent} from "../condition-entry/condition-entry.component";
 import {Dealer} from "../service/dealer";
 import {DealConverter} from "../service/deal-converter";
-import { setTimeout } from "timers/promises";
+import {GeneratedDeal} from "../model/GeneratedDeal";
+import {IntraCommunicationService} from "../service/intra-communication.service";
 
 @Component({
   selector: 'app-board',
@@ -19,19 +20,26 @@ export class BoardComponent {
   generated = false
   recentTries = 0
   busy = false
-  maxTries = 5000000
+  maxTries = 10000000
   players = ["Adam", "Bree", "Cie", "Dora", "Emil"]
 
-  constructor(private dealer: Dealer, private converter: DealConverter) {
+  constructor(private dealer: Dealer, private converter: DealConverter, intraCommunicationService: IntraCommunicationService) {
     this.deal.shuffle()
+    intraCommunicationService.s.subscribe(x => this.setx(x))
   }
 
-  async shuffle() {
+  setx(x: Array<string>) {
+    var i = 0
+    this.entries?.forEach(entry => {
+      entry.condition = x[i]
+      i++
+    })
+  }
+
+  shuffleDirect() {
     if (!this.isShufflePossible())
       return
     this.busy = true
-    await setTimeout(5000);
-
     let generatedDeal = this.dealer.shuffle(this.entries!!.map(t => t.handChecker), this.maxTries)
     this.busy = false
     if (generatedDeal === undefined) {
@@ -40,6 +48,33 @@ export class BoardComponent {
       this.recentTries = generatedDeal.generationNo
       this.deal = generatedDeal
     }
+  }
+
+  shuffle() {
+    if (!this.isShufflePossible())
+      return
+    this.busy = true
+
+    if (typeof Worker !== 'undefined') {
+      // Create a new
+      const worker = new Worker(new URL('./../deal-generation.worker', import.meta.url));
+      worker.onmessage = ({data}) => {
+        let generatedDeal = data.deal
+        this.busy = false
+        if (generatedDeal === undefined) {
+        } else {
+          this.generated = true
+          this.recentTries = generatedDeal.generationNo
+          this.deal = Deal.getDeal(generatedDeal)
+        }
+      };
+      worker.postMessage({conditions: JSON.stringify(this.entries!!.map(t => t.condition)), maxTries: this.maxTries});
+    } else {
+      // Web workers are not supported in this environment.
+      // You should add a fallback so that your program still executes correctly.
+    }
+
+    // let generatedDeal = this.dealer.shuffle(this.entries!!.map(t => t.handChecker), this.maxTries)
 
   }
 
@@ -49,3 +84,4 @@ export class BoardComponent {
   }
 
 }
+

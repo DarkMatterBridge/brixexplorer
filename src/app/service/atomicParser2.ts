@@ -1,16 +1,12 @@
-import {Injectable} from "@angular/core";
 import {HandChecker} from "../model/handChecker";
 import {Hand} from "../model/Hand";
 
-@Injectable({
-  providedIn: 'root'
-})
-export class AtomicParserXXX {
+export class AtomicParser2 {
 
   parse(text: string): HandChecker {
 
     const trimmedText = text.trim();
-    console.log(trimmedText+" "+trimmedText.length)
+    console.log("TEXT: "+trimmedText+" "+trimmedText.length)
     if (trimmedText.length === 0) {
       return () => true;
     }
@@ -50,8 +46,7 @@ export class AtomicParserXXX {
       return this.parseForNoCardsInSuit(text)
     } catch (e) {
     }
-    throw new Error('Atomic expression could '+ text + 'not be parsed');
-
+    throw new Error('Atomic expression could not be parsed');
   }
 
   parseForTrue(cond: string): HandChecker {
