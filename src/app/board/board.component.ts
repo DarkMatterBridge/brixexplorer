@@ -32,6 +32,7 @@ export class BoardComponent {
     var i = 0
     this.entries?.forEach(entry => {
       entry.condition = x[i]
+      entry.check()
       i++
     })
   }
