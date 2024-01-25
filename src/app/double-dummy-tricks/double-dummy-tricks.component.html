@@ -1,1 +1,28 @@
-<p>double-dummy-tricks works!</p>
+<div class="dd">
+  <div *ngIf="ddtricks" class="result">
+    <!--    {{ddtricks}}-->
+    <table>
+      <thead>
+      <td></td>
+      <td>NT</td>
+      <td>♠</td>
+      <td>♥</td>
+      <td>♦</td>
+      <td>♣</td>
+      </thead>
+      <tr *ngFor="let i of [0,1,2,3]">
+        <td>{{direction[i]}}</td>
+        <td *ngFor="let j of [0,1,2,3,4]">
+          {{ddTrickTable[i][j]}}
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="ddelement" *ngIf="!ddtricks">
+
+    <button (click)="getRemoteDDA()" matTooltip="Double Dummy Analysis">
+      <mat-icon aria-label="Example home icon">calculate</mat-icon>
+    </button>
+  </div>
+</div>

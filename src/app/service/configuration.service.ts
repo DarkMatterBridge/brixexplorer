@@ -5,6 +5,10 @@ import { Injectable } from '@angular/core';
 })
 export class ConfigurationService {
 
+  useCorsProxy = true;
+
+
+
   dbURL = ''
   dbToken = ''
 
