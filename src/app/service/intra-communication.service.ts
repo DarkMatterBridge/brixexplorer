@@ -3,6 +3,7 @@ import {Subject} from 'rxjs';
 import {BNodeSequence} from "../model/BNodeSequence";
 import {DBid} from "../model/DBid";
 import {elementSelectors} from "@angular/cdk/schematics";
+import {Board} from "../model/Board";
 
 
 @Injectable({
@@ -10,14 +11,20 @@ import {elementSelectors} from "@angular/cdk/schematics";
 })
 export class IntraCommunicationService {
 
-  s = new Subject<Array<string>>()
+  $conditionsEmitter = new Subject<Array<string>>()
+  $boardEmitter = new Subject<Board>()
 
   constructor() {
   }
 
-  push(bns: Array<DBid>): void {
-    this.s.next(this.transform(bns))
+  pushDbids(bns: Array<DBid>): void {
+    this.$conditionsEmitter.next(this.transform(bns))
   }
+
+  pushBoard(board: Board): void {
+    this.$boardEmitter.next(board)
+  }
+
 
   transform(bids: Array<DBid>): Array<string> {
     return this.importNew(bids.map(x => x.con), "N")

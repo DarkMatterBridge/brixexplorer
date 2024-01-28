@@ -6,6 +6,7 @@ import {Dealer} from "../service/dealer";
 import {DealConverter} from "../service/deal-converter";
 import {GeneratedDeal} from "../model/GeneratedDeal";
 import {IntraCommunicationService} from "../service/intra-communication.service";
+import {Board} from "../model/Board";
 
 @Component({
   selector: 'app-board',
@@ -25,16 +26,21 @@ export class BoardComponent {
 
   constructor(private dealer: Dealer, private converter: DealConverter, intraCommunicationService: IntraCommunicationService) {
     this.deal.shuffle()
-    intraCommunicationService.s.subscribe(x => this.setx(x))
+    intraCommunicationService.$conditionsEmitter.subscribe(x => this.setConditions(x))
+    intraCommunicationService.$boardEmitter.subscribe(board => this.setBoard(board))
   }
 
-  setx(x: Array<string>) {
+   setConditions(conditions: Array<string>) {
     var i = 0
     this.entries?.forEach(entry => {
-      entry.condition = x[i]
+      entry.condition = conditions[i]
       entry.check()
       i++
     })
+  }
+
+  setBoard(board: Board) {
+    this.deal = board.deal; //temp todo
   }
 
   shuffleDirect() {

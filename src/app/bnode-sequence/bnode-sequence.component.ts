@@ -49,7 +49,7 @@ export class BnodeSequenceComponent implements OnInit {
 
   emitSequence(): void {
     this.rebuildBncSequence();  // needed in case of changes in e.g. conditions
-    this.intraCommunicationService.push(this.bNodeSequence.buildCanonicalSequence())
+    this.intraCommunicationService.pushDbids(this.bNodeSequence.buildCanonicalSequence())
     this.bNodeSequenceEventEmitter.emit(this.bNodeSequence); //todo remove since obsolete
   }
 

@@ -39,10 +39,12 @@ export class DoubleDummyTricksComponent {
   }
 
   showResponse(response: string): void {
-    const br = JSON.parse(response) as BridgeRespsonse;
-    alert(response);
-    this.ddtricks = br.sess.ddtricks;
-    this.parseDDTricks();
+   console.log(response)
+    console.log(response.length)
+    // const br = JSON.parse(response) as BridgeRespsonse;
+    // alert(response);
+    // this.ddtricks = br.sess.ddtricks;
+    // this.parseDDTricks();
   }
 
   parseDDTricks(): void {
@@ -65,6 +67,5 @@ export class DoubleDummyTricksComponent {
       }
     }
   }
-
 
 }
